@@ -4,7 +4,8 @@ const Coffee = require('../models/coffee');
 module.exports = {
     create,
     // Add this export
-    delete: deleteReview
+    delete: deleteReview,
+    update
   };
   
   async function deleteReview(req, res) {
@@ -39,3 +40,26 @@ module.exports = {
     }
     res.redirect(`/coffee/${coffee._id}`);
   }
+
+
+// test this feature
+
+
+  async function update(req, res) {
+    try {
+      const updatedCoffee = await Coffee.findOneAndUpdate(
+        { '_id': req.params.coffeeId, 'reviews._id': req.params.reviewId },
+        { "$set": { "reviews.$": req.body } },
+        { new: true }
+      );
+  
+      console.log("Updated document:", updatedCoffee);
+      res.status(200).json(updatedCoffee);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "An error occurred while updating the review." });
+    }
+  }
+  
+
+  

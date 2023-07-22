@@ -10,3 +10,7 @@ body {
 .google-icon{
   height: 2vmin;
 }
+
+.hidden{
+  display: none;
+}

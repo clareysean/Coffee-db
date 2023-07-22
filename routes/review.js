@@ -8,5 +8,7 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 // DELETE /reviews
 router.delete('/:id', ensureLoggedIn, reviewsCtrl.delete);
 
+// not verified to work 
+router.put('/:coffeeId/:reviewId', reviewsCtrl.update)
 
 module.exports = router;

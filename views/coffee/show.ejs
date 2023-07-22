@@ -19,21 +19,44 @@
 <h4>Reviews</h4>
 <hr>
 
-
-    <!-- display reviews on coffee -->
-
-    <%coffee.reviews.forEach((r)=>{%>
-      <div class="review-card">
-        <label for="avatar"><%=r.userName%><img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer" ></label>
-        <h2>Rating: <%=r.rating%> /5</h2>
-        <p><%= r.content %></p>
+    <% coffee.reviews.forEach((r) => { %>
+      <div class="review-card"> 
+        <label for="avatar"><%= r.userName %>
+           <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
+        </label>
+        <h2>Rating: <%= r.rating %> /5</h2>
+          <p><%= r.content %></p>
+      
         <% if (user?._id.equals(r.user)) { %>
             <form action="/review/<%= r._id %>?_method=DELETE" method="POST">
-              <button type="submit">Delete your review</button>
-            </form>
-          <% } %>
+            <button type="submit">Delete your review</button>
+          </form>
+          <button class="edit-review-btn">Edit your review</button>
       </div>
-     <%})%>
+          
+          <div class="edit-form-container hidden">
+            <form action="/review/<%=coffee._id %>/<%=r._id %>?_method=PUT" method="POST">
+              <label for="avatar"><%= r.userName %>
+                <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
+             </label>
+              <label>Edit your review:</label>
+              <label>Rating:</label>
+              <select name="rating">
+                <option value="1" <%= r.rating === 1 ? 'selected' : '' %>>1</option>
+                <option value="2" <%= r.rating === 2 ? 'selected' : '' %>>2</option>
+                <option value="3" <%= r.rating === 3 ? 'selected' : '' %>>3</option>
+                <option value="4" <%= r.rating === 4 ? 'selected' : '' %>>4</option>
+                <option value="5" <%= r.rating === 5 ? 'selected' : '' %>>5</option>
+              </select>
+              <textarea name="content" cols="80" rows="10"><%= r.content %></textarea>
+              <br><br>
+              <button type="submit">Update Review</button>
+            </form>
+            <button class="cancel-edit-btn" type="button">Cancel</button>
+          </div>
+        <% } %>
+      
+    <% }) %>
 
      <%if(user){%>
      <form id="add-review-form" method="post"
@@ -54,5 +77,24 @@
 <%if(!user){%>
   <h2>Log in to leave a review!</h2>
 <%}%>
+
+
+<script>
+ const editReviewBtn = document.querySelector('.edit-review-btn')
+ const reviewCard = document.querySelector('.review-card')
+ const editReviewForm = document.querySelector('.edit-form-container')
+ const cancelEditBtn = document.querySelector('.cancel-edit-btn')
+
+ editReviewBtn.addEventListener('click', ()=>{
+  editReviewForm.classList.toggle('hidden');
+  reviewCard.classList.toggle('hidden');
+ })
+
+ cancelEditBtn.addEventListener('click', ()=> {
+  editReviewForm.classList.toggle('hidden');
+  reviewCard.classList.toggle('hidden');
+ })
+</script>
+
 
 <%- include('../partials/footer') %>
