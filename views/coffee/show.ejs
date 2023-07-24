@@ -20,9 +20,6 @@
       <button type="submit">Delete your CoffeeDB entry</button>
     </form>
     <button class="edit-coffee-btn">Edit your CoffeeDB entry</button>
-    <form action="/coffee/favourites/<%=coffee._id%>" method="post">
-      <button type="submit" class="add-favourite-btn">Add to your favourites</button>
-    </form>
 </div>
 
 
@@ -83,6 +80,9 @@
       </form>
       <button class="cancel-edit-coffee-btn" type="button">Cancel</button></div>
   <%}%>
+  <form action="/coffee/favourites/<%=coffee._id%>" method="post">
+    <button type="submit" class="add-favourite-btn">Add to your favourites</button>
+  </form>
 </div>
 <hr>
 <h4>Reviews</h4>
@@ -152,20 +152,25 @@
 
 
 <script>
- const editReviewBtns = document.querySelectorAll('.edit-review-btn');
- const reviewCards = document.querySelectorAll('.review-card');
- const editReviewForms = document.querySelectorAll('.edit-form-container');
- const cancelEditBtns = document.querySelectorAll('.cancel-edit-btn');
+ const editReviewBtns = [...document.querySelectorAll('.edit-review-btn')];
+ const reviewCards = [...document.querySelectorAll('.review-card')];
+ const editReviewForms = [...document.querySelectorAll('.edit-form-container')];
+ const cancelEditBtns = [...document.querySelectorAll('.cancel-edit-btn')];
 
- const editCoffeeBtn = document.querySelector('.edit-coffee-btn');
+
+const editCoffeeBtn = document.querySelector('.edit-coffee-btn');
+const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
+ 
+
+
  const editCoffeeContainer = document.querySelector('.edit-coffee-container');
  const coffeeCard = document.querySelector('.coffee-card');
- const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
 
 
- editCoffeeBtn.addEventListener('click', handleEditCoffeeBtn)
 
- cancelEditCoffeeBtn.addEventListener('click', handleEditCoffeeBtn)
+ if(editCoffeeBtn){ editCoffeeBtn.addEventListener('click', handleEditCoffeeBtn);  cancelEditCoffeeBtn.addEventListener('click', handleEditCoffeeBtn) }
+
+
 
  function handleEditCoffeeBtn(){
    editCoffeeContainer.classList.toggle('hidden')
@@ -176,11 +181,25 @@
   btn.addEventListener('click', handleEditBtn)
  })
  
- function handleEditBtn(e){
-  console.log(e.target)
-  editReviewForms[e.target.dataset.idx].classList.toggle('hidden');
-  reviewCards[e.target.dataset.idx].classList.toggle('hidden');
- }
+ function handleEditBtn(e) {
+  console.log(e.target);
+  
+  
+  const editFormTarget = editReviewForms.find(form => form.dataset.idx === e.target.dataset.idx);
+  const reviewCardTarget = reviewCards.find(card => card.dataset.idx === e.target.dataset.idx);
+  console.log(Array.isArray(editReviewForms));
+  console.log(editReviewForms);
+
+
+
+  if (editFormTarget && reviewCardTarget) {
+    editFormTarget.classList.toggle('hidden');
+    reviewCardTarget.classList.toggle('hidden');
+  } else {
+    console.log('Node not found for the given dataset.idx');
+  }
+}
+
 
 
 
@@ -189,9 +208,17 @@
  })
 
  function handleCancelBtn(e){
-  editReviewForms[e.target.dataset.idx].classList.toggle('hidden');
-  reviewCards[e.target.dataset.idx].classList.toggle('hidden');
- }
+
+  const editFormTarget = editReviewForms.find(form => form.dataset.idx === e.target.dataset.idx);
+  const reviewCardTarget = reviewCards.find(card => card.dataset.idx === e.target.dataset.idx);
+
+  if (editFormTarget && reviewCardTarget) {
+    editFormTarget.classList.toggle('hidden');
+    reviewCardTarget.classList.toggle('hidden');
+  } else {
+    console.log('Node not found for the given dataset.idx');
+  }
+}
 </script>
 
 
