@@ -20,8 +20,9 @@
       <button type="submit">Delete your CoffeeDB entry</button>
     </form>
     <button class="edit-coffee-btn">Edit your CoffeeDB entry</button>
-    
-     
+    <form action="/coffee/favourites/<%=coffee._id%>" method="post">
+      <button type="submit" class="add-favourite-btn">Add to your favourites</button>
+    </form>
 </div>
 
 

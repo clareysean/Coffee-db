@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+<h1>Your Favourites:</h1>
+<% if (coffees.length) { %>
+  <% coffees.forEach((coffee) => { %>
+
+    <div class="coffee-card">
+      <hr>
+      <img class="google-icon"src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
+      <a href="/coffee/<%= coffee._id %>"><h1><%= coffee.name %></h1></a>
+      <h2><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate %></h2>
+      <h4>Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
+      <p><%= coffee.initReview %></p>
+      <h3>Aroma: <%= coffee.aroma %> </h3><h3>Acidity: <%= coffee.acidity %></h3><h3>Body: <%= coffee.bodyRating %> </h3><h3>Balance: <%= coffee.balance %></h3><h3>Sweetness: <%= coffee.sweetness %></h3>
+      <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
+      <h3>Overall: <%= total %> /100</h3>
+
+      <img class="coffee-img" src="<%= coffee.imageUrl %>" alt="coffee image">
+    </div>
+  <% }) %>
+<% } %>
+
+<%- include('../partials/footer') %>
