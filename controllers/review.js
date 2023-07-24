@@ -9,7 +9,6 @@ module.exports = {
   };
   
   async function deleteReview(req, res) {
-    console.log(`in the delete method`)
     // Note the cool "dot" syntax to query on the property of a subdoc
     const coffee = await Coffee.findOne({ 'reviews._id': req.params.id, 'reviews.user': req.user._id });
     // Rogue user!
@@ -46,20 +45,38 @@ module.exports = {
 
 
   async function update(req, res) {
+
+
     try {
-      const updatedCoffee = await Coffee.findOneAndUpdate(
-        { '_id': req.params.coffeeId, 'reviews._id': req.params.reviewId },
-        { "$set": { "reviews.$": req.body } },
-        { new: true }
-      );
+      await Coffee.findOneAndUpdate(
+        {
+          _id: req.params.coffeeId,
+          'reviews._id': req.params.reviewId
+        },
+        {
+          $set: {
+            'reviews.$[review].content': req.body.content,
+            'reviews.$[review].rating': req.body.rating
+          }
+        },
+        {
+          new: true,
+          arrayFilters: [{ 'review._id': req.params.reviewId }]
+        }
+      ), (error,doc)=>{
+        console.log(`in the callback`);
+        console.log(doc);
+      };
+    
+       
   
-      console.log("Updated document:", updatedCoffee);
-      res.status(200).json(updatedCoffee);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: "An error occurred while updating the review." });
+
+        res.redirect(`/coffee/${req.params.coffeeId}`)
+     
+    } catch (error) {
+      console.error('Error updating coffee review:', error);
     }
-  }
+}
   
 
   

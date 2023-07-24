@@ -14,13 +14,82 @@
   <h3>Overall: <%= total %> /100</h3>
 
   <img class="coffee-img" src="<%= coffee.imageUrl %>" alt="coffee image">
+
+  <% if (user?._id.equals(coffee.user)) { %>
+    <form action="/coffee/<%= coffee._id %>?_method=DELETE" method="post">
+      <button type="submit">Delete your CoffeeDB entry</button>
+    </form>
+    <button class="edit-coffee-btn">Edit your CoffeeDB entry</button>
+    
+     
+</div>
+
+
+    <div class="edit-coffee-container hidden"> 
+      <form  class="edit-coffee-form" action="/coffee/<%=coffee._id%>?_method=PUT" method="post" enctype="multipart/form-data" autocomplete="off">
+      <h4>Add a roast</h4>
+      <hr>
+       <label for="name">Name: </label><input type="text" name="name" value="<%=coffee.name%>">
+       <label for="roaster">Roaster: </label><input type="text" value="<%=coffee.roaster%>" name="roaster">
+       <label for="roastDate">Roast Date: </label><input type="datetime-local" value="<%= coffee.roastDate %>" name="roastDate" />
+       <label for="aroma">Aroma: </label>
+       <select name="aroma">
+          <option value="1" <%= coffee.aroma === 1 ? 'selected' : '' %>>1</option>
+          <option value="2"<%= coffee.aroma === 2 ? 'selected' : '' %>>2</option>
+          <option value="3"<%= coffee.aroma === 3 ? 'selected' : '' %>>3</option>
+          <option value="4"<%= coffee.aroma === 4 ? 'selected' : '' %>>4</option>
+          <option value="5"<%= coffee.aroma === 5 ? 'selected' : '' %>>5</option>
+        </select>
+       <label for="acidity">Acidity: </label>
+       <select name="acidity">
+          <option value="1" <%= coffee.acidity === 1 ? 'selected' : '' %>>1</option>
+          <option value="2" <%= coffee.acidity === 2 ? 'selected' : '' %>>2</option>
+          <option value="3" <%= coffee.acidity === 3 ? 'selected' : '' %>>3</option>
+          <option value="4" <%= coffee.acidity === 4 ? 'selected' : '' %>>4</option>
+          <option value="5" <%= coffee.acidity === 5 ? 'selected' : '' %>>5</option>
+        </select>
+       <label for="bodyRating">Body: </label>
+       <select name="bodyRating">
+          <option value="1" <%= coffee.bodyRating === 1 ? 'selected' : '' %>>1</option>
+          <option value="2" <%= coffee.bodyRating === 2 ? 'selected' : '' %>>2</option>
+          <option value="3" <%= coffee.bodyRating === 3 ? 'selected' : '' %>>3</option>
+          <option value="4" <%= coffee.bodyRating === 4 ? 'selected' : '' %>>4</option>
+          <option value="5" <%= coffee.bodyRating === 5 ? 'selected' : '' %>>5</option>
+        </select>
+       <label for="balance">Balance: </label>
+       <select name="balance">
+         <option value="1" <%= coffee.balance === 1 ? 'selected' : '' %>>1</option>
+         <option value="2" <%= coffee.balance === 2 ? 'selected' : '' %>>2</option>
+         <option value="3" <%= coffee.balance === 3 ? 'selected' : '' %>>3</option>
+         <option value="4" <%= coffee.balance === 4 ? 'selected' : '' %>>4</option>
+         <option value="5" <%= coffee.balance === 5 ? 'selected' : '' %>>5</option>
+       </select>
+    
+       <label for="sweetness">Sweetness: </label>
+       <select name="sweetness">
+         <option value="1" <%= coffee.sweetness === 1 ? 'selected' : '' %>>1</option>
+         <option value="2" <%= coffee.sweetness === 2 ? 'selected' : '' %>>2</option>
+         <option value="3" <%= coffee.sweetness === 3 ? 'selected' : '' %>>3</option>
+         <option value="4" <%= coffee.sweetness === 4 ? 'selected' : '' %>>4</option>
+         <option value="5" <%= coffee.sweetness === 5 ? 'selected' : '' %>>5</option>
+       </select>
+        <hr>
+        <label for="review">Review: </label>
+        <textarea name="initReview" cols="80" rows="10"><%=coffee.initReview%></textarea>
+        <input type="file" name="image" id="imageUpload" accept="image/*">
+        <br>
+        <button class="landing-btns" type="submit">Save Changes</button>
+      </form>
+      <button class="cancel-edit-coffee-btn" type="button">Cancel</button></div>
+  <%}%>
 </div>
 <hr>
 <h4>Reviews</h4>
 <hr>
 
-    <% coffee.reviews.forEach((r) => { %>
-      <div class="review-card"> 
+<%if(coffee.reviews.length){ %>
+    <% coffee.reviews.forEach((r,i) => { %>
+      <div class="review-card" data-idx="<%=i%>"> 
         <label for="avatar"><%= r.userName %>
            <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
         </label>
@@ -31,10 +100,10 @@
             <form action="/review/<%= r._id %>?_method=DELETE" method="POST">
             <button type="submit">Delete your review</button>
           </form>
-          <button class="edit-review-btn">Edit your review</button>
+          <button class="edit-review-btn" data-idx="<%=i%>">Edit your review</button>
       </div>
           
-          <div class="edit-form-container hidden">
+          <div class="edit-form-container hidden" data-idx="<%=i%>">
             <form action="/review/<%=coffee._id %>/<%=r._id %>?_method=PUT" method="POST">
               <label for="avatar"><%= r.userName %>
                 <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
@@ -52,11 +121,13 @@
               <br><br>
               <button type="submit">Update Review</button>
             </form>
-            <button class="cancel-edit-btn" type="button">Cancel</button>
+            <button class="cancel-edit-btn" data-idx="<%=i%>" type="button">Cancel</button>
           </div>
         <% } %>
       
     <% }) %>
+
+    <%}%>
 
      <%if(user){%>
      <form id="add-review-form" method="post"
@@ -80,20 +151,46 @@
 
 
 <script>
- const editReviewBtn = document.querySelector('.edit-review-btn')
- const reviewCard = document.querySelector('.review-card')
- const editReviewForm = document.querySelector('.edit-form-container')
- const cancelEditBtn = document.querySelector('.cancel-edit-btn')
+ const editReviewBtns = document.querySelectorAll('.edit-review-btn');
+ const reviewCards = document.querySelectorAll('.review-card');
+ const editReviewForms = document.querySelectorAll('.edit-form-container');
+ const cancelEditBtns = document.querySelectorAll('.cancel-edit-btn');
 
- editReviewBtn.addEventListener('click', ()=>{
-  editReviewForm.classList.toggle('hidden');
-  reviewCard.classList.toggle('hidden');
+ const editCoffeeBtn = document.querySelector('.edit-coffee-btn');
+ const editCoffeeContainer = document.querySelector('.edit-coffee-container');
+ const coffeeCard = document.querySelector('.coffee-card');
+ const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
+
+
+ editCoffeeBtn.addEventListener('click', handleEditCoffeeBtn)
+
+ cancelEditCoffeeBtn.addEventListener('click', handleEditCoffeeBtn)
+
+ function handleEditCoffeeBtn(){
+   editCoffeeContainer.classList.toggle('hidden')
+   coffeeCard.classList.toggle('hidden')
+ }
+
+ editReviewBtns.forEach((btn)=>{
+  btn.addEventListener('click', handleEditBtn)
+ })
+ 
+ function handleEditBtn(e){
+  console.log(e.target)
+  editReviewForms[e.target.dataset.idx].classList.toggle('hidden');
+  reviewCards[e.target.dataset.idx].classList.toggle('hidden');
+ }
+
+
+
+ cancelEditBtns.forEach((btn)=>{
+ btn.addEventListener('click', handleCancelBtn)
  })
 
- cancelEditBtn.addEventListener('click', ()=> {
-  editReviewForm.classList.toggle('hidden');
-  reviewCard.classList.toggle('hidden');
- })
+ function handleCancelBtn(e){
+  editReviewForms[e.target.dataset.idx].classList.toggle('hidden');
+  reviewCards[e.target.dataset.idx].classList.toggle('hidden');
+ }
 </script>
 
 
