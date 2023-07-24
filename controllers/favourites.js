@@ -2,7 +2,9 @@ const Coffee = require('../models/coffee');
 const UserFavourite = require('../models/favourite')
 
 module.exports={
-    create
+    create,
+    index,
+    delete: deleteFavourite
 }
 
 async function create(req, res) {
@@ -43,4 +45,23 @@ async function create(req, res) {
       res.status(500).json({ message: 'An error occurred' });
     }
   }
+  
+
+  async function index (req,res){
+    console.log(`in index favs`)
+    if(req.user){
+        const userFavouriteDoc = await UserFavourite.findOne({ user: req.user._id });
+        res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
+    } else{
+        res.redirect('/')
+    }
+  }
+
+  async function deleteFavourite (req,res){
+    const userFavouriteDoc = await UserFavourite.findOne({ user: req.user._id });
+    userFavouriteDoc.favourites.remove(req.params.id)
+    await userFavouriteDoc.save();
+    res.redirect('/coffee/favourites');
+  }
+
   

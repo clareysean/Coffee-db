@@ -15,6 +15,9 @@
       <h3>Overall: <%= total %> /100</h3>
 
       <img class="coffee-img" src="<%= coffee.imageUrl %>" alt="coffee image">
+      <form action="/coffee/favourites/<%= coffee._id %>?_method=DELETE" method="POST">
+        <button type="submit">Remove from favourites</button>
+      </form>
     </div>
   <% }) %>
 <% } %>

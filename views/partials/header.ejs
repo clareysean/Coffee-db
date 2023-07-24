@@ -14,7 +14,13 @@
         <button type="submit"><img class="google-icon" src="/images/search-button-svgrepo-com.svg" alt=""></button>
      </form>
       <a href="/coffee" class="nav-link">Browse</a>
-      <a href="/coffee/new" class="nav-link">Add a Roast</a>
-      <a href="/auth/google">Login<img class="google-icon" src='/images/google-svgrepo-com.svg'></a>
+      
+      <%if(user){%>
+      <a href="/coffee/new" class="nav-link">Add a roast</a>
+      <a href="/logout">Log out</a>
+      <a href="/coffee/favourites">Your favourites</a>
+      <%} else { %>
+        <a href="/auth/google">Login<img class="google-icon" src='/images/google-svgrepo-com.svg'></a>
+      <% } %>
   </nav>
   <body>
