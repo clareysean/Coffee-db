@@ -3,9 +3,13 @@
 <div class="coffee-card">
   <h4>Details</h4>
   <hr>
+  <%if(locals.errorMsg){%>
+    <p><%=errorMsg%></p>
+    <%}%>
   <img class="google-icon" src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
   <h1><%= coffee.name %></h1>
-  <h2><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
+  <h2><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2> 
+  <!-- formatted roastDate -->
   <h4>Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
   <p><%= coffee.initReview %></p>
   <h3>Aroma: <%= coffee.aroma %> </h3><h3>Acidity: <%= coffee.acidity %></h3><h3>Body: <%= coffee.bodyRating %> </h3><h3>Balance: <%= coffee.balance %></h3><h3>Sweetness: <%= coffee.sweetness %></h3>
@@ -29,7 +33,7 @@
       <hr>
        <label for="name">Name: </label><input type="text" name="name" value="<%=coffee.name%>">
        <label for="roaster">Roaster: </label><input type="text" value="<%=coffee.roaster%>" name="roaster">
-       <label for="roastDate">Roast Date: </label><input type="datetime-local" value="<%= coffee.roastDate %>" name="roastDate" />
+       <label for="roastDate">Roast Date: </label><input type="datetime-local" value="<%= roastDate %>" name="roastDate" />
        <label for="aroma">Aroma: </label>
        <select name="aroma">
           <option value="1" <%= coffee.aroma === 1 ? 'selected' : '' %>>1</option>
@@ -80,9 +84,11 @@
       </form>
       <button class="cancel-edit-coffee-btn" type="button">Cancel</button></div>
   <%}%>
+  <%if(user){%>
   <form action="/coffee/favourites/<%=coffee._id%>" method="post">
     <button type="submit" class="add-favourite-btn">Add to your favourites</button>
   </form>
+  <%}%>
 </div>
 <hr>
 <h4>Reviews</h4>
@@ -184,12 +190,15 @@ const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
  function handleEditBtn(e) {
   console.log(e.target);
   
-  
+  const flipHiddenForm = editReviewForms.find((form) => {
+    let classList = [...form.classList];
+    console.log(classList)
+  })
+
+  console.log(flipHiddenForm)
+
   const editFormTarget = editReviewForms.find(form => form.dataset.idx === e.target.dataset.idx);
   const reviewCardTarget = reviewCards.find(card => card.dataset.idx === e.target.dataset.idx);
-  console.log(Array.isArray(editReviewForms));
-  console.log(editReviewForms);
-
 
 
   if (editFormTarget && reviewCardTarget) {

@@ -1,5 +1,7 @@
 <%- include('../partials/header') %>
-
+<% if (locals.errorMsg) { %>
+  <p><%= errorMsg %></p>
+<% } %>
 <form  class="new-coffee-form" action="/coffee" method="post" enctype="multipart/form-data" autocomplete="off">
     <h4>Add a roast</h4>
     <hr>

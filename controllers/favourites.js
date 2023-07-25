@@ -50,11 +50,17 @@ async function create(req, res) {
   async function index (req,res){
     console.log(`in index favs`)
     if(req.user){
+      try{        
         const userFavouriteDoc = await UserFavourite.findOne({ user: req.user._id });
         res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
-    } else{
-        res.redirect('/')
-    }
+      return;}
+        catch(err){
+          console.log(err);
+          res.render('coffee/favourites', { errorMsg: `You don't have any favourites yet` })
+          return;
+        }
+
+    }    
   }
 
   async function deleteFavourite (req,res){

@@ -23,12 +23,12 @@ const reviewSchema = new Schema({
     timestamps: true
   });
 
-// when user is not required the app works well, when it is, the req.body gets wiped out, is empty when logged in the create method in the coffee controller
+
 const coffeeSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false
+        required: true
       },
       userName: String,
       userAvatar: String,
@@ -36,9 +36,9 @@ const coffeeSchema = new Schema({
       name:{ type: String, required: true },
       roaster: { type: String, required: true },
       imageUrl: { type: String, required: false },
-      roastDate: { type: Date, default: function() {
+      roastDate: { type: Date, default: function () {
         return new Date();
-      }},
+      }, timeZone: 'UTC' },
       aroma: {
         type: Number,
         min: 1,
