@@ -174,7 +174,9 @@ const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
 
 
 
- if(editCoffeeBtn){ editCoffeeBtn.addEventListener('click', handleEditCoffeeBtn);  cancelEditCoffeeBtn.addEventListener('click', handleEditCoffeeBtn) }
+ if(editCoffeeBtn){ 
+  editCoffeeBtn.addEventListener('click', handleEditCoffeeBtn);  
+  cancelEditCoffeeBtn.addEventListener('click', handleEditCoffeeBtn) }
 
 
 
@@ -189,16 +191,23 @@ const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
  
  function handleEditBtn(e) {
   console.log(e.target);
-  
-  const flipHiddenForm = editReviewForms.find((form) => {
-    let classList = [...form.classList];
-    console.log(classList)
-  })
-
-  console.log(flipHiddenForm)
 
   const editFormTarget = editReviewForms.find(form => form.dataset.idx === e.target.dataset.idx);
   const reviewCardTarget = reviewCards.find(card => card.dataset.idx === e.target.dataset.idx);
+  
+  const showingForm = editReviewForms.find((form) => {
+    let classList = [...form.classList];
+    if(!classList.includes('hidden')){
+      form.classList.toggle('hidden')
+    }
+  })
+
+  const hiddenReview = reviewCards.find((card) => {
+    let classList = [...card.classList];
+    if(classList.includes('hidden')){
+      card.classList.toggle('hidden')
+    }
+  })
 
 
   if (editFormTarget && reviewCardTarget) {
