@@ -13,8 +13,8 @@ async function create(req, res) {
     try {
       const userFavouriteDoc = await UserFavourite.findOne({ user: req.user._id });
   
-      if (userFavouriteDoc) { console.log(`found a user favs doc`)
-        if(userFavouriteDoc.favourites.some(fav => fav._id.equals(newFavouriteCoffee._id))){ console.log(`it had the doc in it`)
+      if (userFavouriteDoc) { 
+        if(userFavouriteDoc.favourites.some(fav => fav._id.equals(newFavouriteCoffee._id))){
             res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
       
         } else {
@@ -56,7 +56,7 @@ async function create(req, res) {
       return;}
         catch(err){
           console.log(err);
-          res.render('coffee/favourites', { errorMsg: `You don't have any favourites yet` })
+          res.render('coffee/favourites', { errorMsg: `You don't have any favourites yet.` })
           return;
         }
 

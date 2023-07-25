@@ -1,12 +1,13 @@
 <%- include('../partials/header') %>
-
+<hr>
+<br><br>
 <% if (coffees.length) { %>
   <% coffees.forEach((coffee) => { %>
 
     <div class="coffee-card">
-      <hr>
+      
       <img class="google-icon"src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
-      <a href="/coffee/<%= coffee._id %>"><h1><%= coffee.name %></h1></a>
+      <a class="coffee-link" href="/coffee/<%= coffee._id %>"><h1><%= coffee.name %></h1></a>
       <h2><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
       <h4>Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
       <p><%= coffee.initReview %></p>
@@ -15,6 +16,7 @@
       <h3>Overall: <%= total*4 %> /100</h3>
 
       <img class="coffee-img" src="<%= coffee.imageUrl %>" alt="coffee image">
+      <hr>
     </div>
   <% }) %>
 <% } %>

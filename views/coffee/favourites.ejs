@@ -1,6 +1,9 @@
 <%- include('../partials/header') %>
 <h1>Your Favourites:</h1>
 <% if (locals.coffees) { %>
+  <% if(!coffees.length) { %>
+    <p>You don't have any favourites.</p>
+  <%} %>
   <% coffees.forEach((coffee) => { %>
 
     <div class="coffee-card">
@@ -20,7 +23,7 @@
       </form>
     </div>
   <% }) %>
-<% } else if(locals.errorMsg) { %>
+<% } else {%>
   <p><%=errorMsg%></p>
-<%}%>
+  <%}%>
 <%- include('../partials/footer') %>

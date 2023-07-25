@@ -150,11 +150,17 @@ async function create(req, res) {
 
  async function update(req,res){
 
-    upload.single('image')(req, res, async function (err) {
+    upload(req, res, async function (err) {
+
+      const coffee = await Coffee.findById(req.params.id);
+
+      const coffeeForDefaultDate = new Coffee;
+      const defaultRoastDate = coffeeForDefaultDate.roastDate;
 
       if (err) {
         console.error('Error uploading image:', err);
-        return res.status(500).send('Error uploading image');
+        res.render('coffee/show', { coffee: coffee, roastDate: defaultRoastDate, errorMsg: '*Update failed: Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB'});
+        return;
       }
       if (req.file) {
          req.body.imageUrl = '/uploads/' + req.file.filename;
@@ -164,15 +170,12 @@ async function create(req, res) {
 
       // if(!req.body.roastDate){
          
-        const coffeeForDefaultDate = new Coffee;
-        const defaultRoastDate = coffeeForDefaultDate.roastDate;
+      
       //   const rD = coffeeForDefaultDate.roastDate;
       //   let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
       //   roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
       //   req.body.roastDate = roastDate;
       // }
-      
-      const coffee = await Coffee.findById(req.params.id);
       
       const updatedDate = new Date(req.body.roastDate);
       const todaysDate = new Date();

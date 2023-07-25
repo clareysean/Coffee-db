@@ -3,14 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:wght@300&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <title>CoffeeDB</title>
 </head>
 <body>
-  <div class="landing-panel">
-    <h1 class="main-heading">CoffeeDB</h1>
-    <a class="landing-btns" href="/coffee">Continue as a guest</a><a href="/auth/google">Continue with Google <img class="google-icon" src='/images/google-svgrepo-com.svg'></a>
-  </div>  
+
+    <div class="landing-wrapper">
+      <div class="landing-panel">
+        <h1 class="main-heading">CoffeeDB</h1>
+        <div class="logo-badge">
+          <hr class="badge-hr-l">
+          <img class="landing-brand" src="/images/coffee-svgrepo-com.svg" alt="coffee logo">
+          <hr class="badge-hr-r">
+        </div>
+      </div>
+      <div class="landing-links-container">
+        <a class="landing-btns-l" href="/coffee"><p class="landing-btn-txt">Continue as a guest</p></a>
+        <a class="landing-btns-r" href="/auth/google"><p class="landing-btn-txt">Login with Google </p><img class="google-icon" src='/images/icons8-google.svg'></a>
+      </div>
+    </div>
+
 </body>
 </html>
 
