@@ -7,7 +7,7 @@
       <hr>
       <img class="google-icon"src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
       <a href="/coffee/<%= coffee._id %>"><h1><%= coffee.name %></h1></a>
-      <h2><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate %></h2>
+      <h2><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
       <h4>Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
       <p><%= coffee.initReview %></p>
       <h3>Aroma: <%= coffee.aroma %> </h3><h3>Acidity: <%= coffee.acidity %></h3><h3>Body: <%= coffee.bodyRating %> </h3><h3>Balance: <%= coffee.balance %></h3><h3>Sweetness: <%= coffee.sweetness %></h3>
@@ -17,6 +17,7 @@
       <img class="coffee-img" src="<%= coffee.imageUrl %>" alt="coffee image">
     </div>
   <% }) %>
-<% } %>
-
+<% } else { %>
+  <p>No coffees found. Try again with different keywords.</p>
+<%}%>
 <%- include('../partials/footer') %>
