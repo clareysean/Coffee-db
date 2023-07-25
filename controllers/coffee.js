@@ -2,7 +2,38 @@ const Coffee = require('../models/coffee');
 const multer = require('multer');
 
 // Set up Multer to store uploaded images in the 'public/uploads' directory
-const upload = multer({ dest: 'public/uploads/' });
+// const upload = multer({ dest: 'public/uploads/' });
+
+const maxSize = 209152;
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix)
+  }
+})
+
+const upload = multer({ 
+  storage: storage, 
+  fileFilter: (req, file, cb) => {
+    if(
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error("Only .png, .jpg and .jpeg format"))
+    }
+  },
+  limits: { fileSize: maxSize },
+}).single('image')
+
+
 
 module.exports = {
   index,
@@ -13,7 +44,6 @@ module.exports = {
   delete: deleteCoffee
 };
 
-// Your existing controller functions go here...
 
 
 async function index(req,res){
@@ -47,7 +77,6 @@ async function show(req,res){
     roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
 
 
-    // console.log(coffee.roastDate)
     res.render('coffee/show', { coffee, roastDate: roastDate });
 }
 
@@ -57,27 +86,30 @@ async function create(req, res) {
     for (let key in req.body) {
       if (req.body[key] === '') delete req.body[key];
     }
+
+
+    const coffeeForDefaultDate = new Coffee;
+    const rD = coffeeForDefaultDate.roastDate;
+
+    let defaultRoastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
+    defaultRoastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
+
+
     try {
-      upload.single('image')(req, res, async function (err) {
+      upload(req, res, async function (err) {
         if (err) {
           console.error('Error uploading image:', err);
-          return res.status(500).send('Error uploading image');
+          res.render('coffee/new', { errorMsg: 'Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB', roastDate: defaultRoastDate.toString});
         }
   
         if (req.file) {
           req.body.imageUrl = '/uploads/' + req.file.filename;
         }
+
         req.body.user = req.user._id;
         req.body.userName = req.user.name;
         req.body.userAvatar = req.user.avatar;
-        // req.body.roastDate = req.body.roastDate.toISOString().slice(0, 10)
-
-        const coffeeForDefaultDate = new Coffee;
-        const rD = coffeeForDefaultDate.roastDate;
-    
-        let defaultRoastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-        defaultRoastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
-
+        
         const submittedDate = new Date(req.body.roastDate);
         const todaysDate = new Date();
         console.log(submittedDate)
