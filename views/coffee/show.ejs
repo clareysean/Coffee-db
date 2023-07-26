@@ -3,13 +3,12 @@
 
 
 <div class="show-coffee-wrapper">
-      <h1 class="show-heading">Details</h1>
+      <h1 class="show-heading">Details:</h1>
       <%if(locals.errorMsg){%>
         <p class="error-txt"><%=errorMsg%></p>
         <%}%>
    <div class="coffee-card show-coffee-card">
           <hr class="coffee-card-hr show-hr-top">
-
           <img class="coffee-user-icon" src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
 
           <div class="coffee-card-heading-wrapper">
@@ -48,15 +47,10 @@
               <form action="/coffee/favourites/<%=coffee._id%>" method="post">
                  <button type="submit" class="add-favourite-btn show-btn">Add to your favourites</button>
               </form>
-      
           </div>
 
           <hr class="coffee-card-hr show-hr-bottom">
       
-   
-
-
-          <!-- edit container hidden -->
              <%}%>
              <%if(user && !user._id.equals(coffee.user)){%>
               <form action="/coffee/favourites/<%=coffee._id%>" method="post">
@@ -148,11 +142,9 @@
 
 <!-- show coffee wrapper -->
 
-         <h2 class="reviews-heading">Reviews</h2>
-         <!-- <hr class="review-hr"> -->
-  
-  
-     <div class="reviews-wrapper">
+<h1 class="reviews-heading">Reviews</h1>
+
+    <div class="reviews-wrapper">
       
       <%if(coffee.reviews.length){ %>
           <% coffee.reviews.forEach((r,i) => { %>
@@ -242,100 +234,5 @@
     </div>
     <!-- reviews wrapper -->
   
-
-<script>
- const editReviewBtns = [...document.querySelectorAll('.edit-review-btn')];
- const reviewCards = [...document.querySelectorAll('.review-card')];
- const editReviewForms = [...document.querySelectorAll('.edit-form-container')];
- const cancelEditBtns = [...document.querySelectorAll('.cancel-edit-btn')];
-
-
-const editCoffeeBtn = document.querySelector('.edit-coffee-btn');
-const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
-const newReviewForm = document.querySelector('.new-coffee-review-form')
- 
-
-
- const editCoffeeContainer = document.querySelector('.edit-coffee-container');
- const coffeeCard = document.querySelector('.coffee-card');
-
-
-
- if(editCoffeeBtn){ 
-  editCoffeeBtn.addEventListener('click', handleEditCoffeeBtn);  
-  cancelEditCoffeeBtn.addEventListener('click', handleEditCoffeeBtn) }
-
-
-
- function handleEditCoffeeBtn(e){
-  console.log(e.target)
-   
-   newReviewForm.classList.toggle('hidden')
-   editCoffeeContainer.classList.toggle('hidden')
-   coffeeCard.classList.toggle('hidden')
- }
-
-// reviews
-
-
- editReviewBtns.forEach((btn)=>{
-  btn.addEventListener('click', handleEditBtn)
- })
- 
- function handleEditBtn(e) {
-  console.log(e.target);
-
-  const editFormTarget = editReviewForms.find(form => form.dataset.idx === e.target.dataset.idx);
-  const reviewCardTarget = reviewCards.find(card => card.dataset.idx === e.target.dataset.idx);
-
-  console.log(editFormTarget)
-  console.log(reviewCardTarget)
-  
-  const showingForm = editReviewForms.find((form) => {
-    let classList = [...form.classList];
-    if(!classList.includes('hidden')){
-      form.classList.toggle('hidden')
-    }
-  })
-
-  const hiddenReview = reviewCards.find((card) => {
-    let classList = [...card.classList];
-    if(classList.includes('hidden')){
-      card.classList.toggle('hidden')
-    }
-  })
-
-
-  if (editFormTarget && reviewCardTarget) {
-    editFormTarget.classList.toggle('hidden');
-    reviewCardTarget.classList.toggle('hidden');
-  } else {
-    console.log('Node not found for the given dataset.idx');
-  }
-}
-
-
-
-
- cancelEditBtns.forEach((btn)=>{
- btn.addEventListener('click', handleCancelBtn)
- })
-
- function handleCancelBtn(e){
-
-  e.preventDefault();  
-
-  const editFormTarget = editReviewForms.find(form => form.dataset.idx === e.target.dataset.idx);
-  const reviewCardTarget = reviewCards.find(card => card.dataset.idx === e.target.dataset.idx);
-
-  if (editFormTarget && reviewCardTarget) {
-    editFormTarget.classList.toggle('hidden');
-    reviewCardTarget.classList.toggle('hidden');
-  } else {
-    console.log('Node not found for the given dataset.idx');
-  }
-}
-</script>
-
-
+<script src="/scripts/showHelper.js"></script>
 <%- include('../partials/footer') %>

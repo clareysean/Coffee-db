@@ -102,6 +102,7 @@ async function create(req, res) {
         if (err) {
           console.error('Error uploading image:', err);
           res.render('coffee/new', { errorMsg: 'Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB', roastDate: defaultRoastDate.toString});
+          return;
         }
   
         if (req.file) {
