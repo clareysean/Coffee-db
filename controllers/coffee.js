@@ -101,8 +101,8 @@ async function create(req, res) {
       upload(req, res, async function (err) {
         if (err) {
           console.error('Error uploading image:', err);
+          console.log(`before new redirect error uploading`)
           return res.render('coffee/new', { errorMsg: 'Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB', roastDate: defaultRoastDate.toString});
-          
         }
   
         if (req.file) {
