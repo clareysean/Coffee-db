@@ -1,5 +1,7 @@
+const coffee = require('../models/coffee');
 const Coffee = require('../models/coffee');
 const multer = require('multer');
+const FavDoc = require('../models/favourite')
 
 
 
@@ -70,15 +72,16 @@ function newCoffee (req,res){
 }
 
 async function show(req,res){
-    const coffee = await Coffee.findById(req.params.id);
 
-    const rD = coffee.roastDate;
+   const coffee = await Coffee.findById(req.params.id);
 
-    let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-    roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
+   const rD = coffee.roastDate;
 
+   let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
+   roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
 
-    res.render('coffee/show', { coffee, roastDate: roastDate });
+    res.render('coffee/show', { coffee, defaultRoastDate: roastDate});
+
 }
 
 
@@ -155,50 +158,59 @@ async function create(req, res) {
 
       const coffee = await Coffee.findById(req.params.id);
 
-      const coffeeForDefaultDate = new Coffee;
-      const defaultRoastDate = coffeeForDefaultDate.roastDate;
+      const rD = coffee.roastDate;
+
+      let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
+      roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
 
       if (err) {
         console.error('Error uploading image:', err);
-        res.render('coffee/show', { coffee: coffee, roastDate: defaultRoastDate, errorMsg: '*Update failed: Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB'});
+        res.render('coffee/show', { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed: Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB'});
         return;
       }
       if (req.file) {
          req.body.imageUrl = '/uploads/' + req.file.filename;
       }
-
-     // not sure this is even necessary sine the datetime-local input has a default value assigned when the show page is rendered. 
-
-      // if(!req.body.roastDate){
-         
-      
-      //   const rD = coffeeForDefaultDate.roastDate;
-      //   let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-      //   roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
-      //   req.body.roastDate = roastDate;
-      // }
       
       const updatedDate = new Date(req.body.roastDate);
       const todaysDate = new Date();
 
       if(updatedDate>todaysDate){
         console.error('Error updating coffee:', err);
-        res.render('coffee/show', { coffee: coffee, roastDate: defaultRoastDate, errorMsg: '*Update failed: The roast date cannot be in the future!'});
+        res.render('coffee/show', { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed: The roast date cannot be in the future!'});
         return;
       }
 
-      if(!req.body.name || !req.body.roaster || !req.body.initReview){
+      if(!req.body.name || !req.body.roaster || !req.body.initReview || !req.body.roastDate){
         
-        res.render(`coffee/show`, { coffee: coffee, errorMsg: '*Update failed due to missing fields; please provide a name and a roaster for your entry!' });
+        res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields; please provide a name, a roaster, and a date for your entry!' });
         return;
       }
+      
+      try{
         await Coffee.findOneAndUpdate({'_id': req.params.id}, {$set: req.body});
         res.redirect(`/coffee/${req.params.id}`)
+      } catch(err){
+        res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields; please provide a name, a roaster, and a date for your entry!' });
+        return;
+      }
+      
     });
    } 
 
 
 async function deleteCoffee(req,res){
-    await Coffee.findByIdAndDelete(req.params.id);
+    const coffee = await Coffee.findByIdAndDelete(req.params.id);
+
+    try{ await FavDoc.updateMany(
+      {},
+      { $pull: { favourites: { name: coffee.name } } }
+    );
+
+    console.log(`${updateResult.modifiedCount} documents removed.`);
+  } catch (err) {
+    console.error('Error deleting documents:', err);
+  }
+
     res.redirect(`/coffee`)
 }

@@ -4,12 +4,12 @@
 
 <div class="show-coffee-wrapper">
       <h1 class="show-heading">Details</h1>
-      
+      <%if(locals.errorMsg){%>
+        <p class="error-txt"><%=errorMsg%></p>
+        <%}%>
    <div class="coffee-card show-coffee-card">
           <hr class="coffee-card-hr show-hr-top">
-          <%if(locals.errorMsg){%>
-          <p class="error-txt"><%=errorMsg%></p>
-          <%}%>
+
           <img class="coffee-user-icon" src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
 
           <div class="coffee-card-heading-wrapper">
@@ -53,86 +53,8 @@
 
           <hr class="coffee-card-hr show-hr-bottom">
       
-    </div>
-          <div class="edit-coffee-container hidden">
-            <form  class="edit-coffee-form" action="/coffee/<%=coffee._id%>?_method=PUT" method="post" enctype="multipart/form-data" autocomplete="off">
-              <h4 class="edit-coffee-heading">Edit your post:</h4>
-      
-              <div class="edit-coffee-inputs-wrapper">
-              
-                    <div class="edit-coffee-headings-wrapper">
-                       <label class="new-coffee-label" for="name">Name: </label>
-                       <input class="new-coffee-input" type="text" name="name" value="<%=coffee.name%>">
-                       <label class="new-coffee-label" for="roaster">Roaster: </label>
-                       <input class="new-coffee-input" type="text" value="<%=coffee.roaster%>" name="roaster">
-                       <label class="new-coffee-label" for="roastDate">Roast Date: </label>
-                       <input class="date-picker" type="datetime-local" value="<%= roastDate %>" name="roastDate" />
-                    </div>
+   
 
-                    <div class="edit-coffee-ratings-wrapper">
-                      <label class="new-coffee-label" for="aroma">Aroma: </label>
-                        <select class="new-coffee-select" name="aroma">
-                           <option value="1" <%= coffee.aroma === 1 ? 'selected' : '' %>>1</option>
-                           <option value="2"<%= coffee.aroma === 2 ? 'selected' : '' %>>2</option>
-                           <option value="3"<%= coffee.aroma === 3 ? 'selected' : '' %>>3</option>
-                           <option value="4"<%= coffee.aroma === 4 ? 'selected' : '' %>>4</option>
-                           <option value="5"<%= coffee.aroma === 5 ? 'selected' : '' %>>5</option>
-                         </select>
-                      <label class="new-coffee-label" for="acidity">Acidity: </label>
-                        <select class="new-coffee-select" name="acidity">
-                           <option value="1" <%= coffee.acidity === 1 ? 'selected' : '' %>>1</option>
-                           <option value="2" <%= coffee.acidity === 2 ? 'selected' : '' %>>2</option>
-                           <option value="3" <%= coffee.acidity === 3 ? 'selected' : '' %>>3</option>
-                           <option value="4" <%= coffee.acidity === 4 ? 'selected' : '' %>>4</option>
-                           <option value="5" <%= coffee.acidity === 5 ? 'selected' : '' %>>5</option>
-                         </select>
-                      <label class="new-coffee-label" for="bodyRating">Body: </label>
-                        <select class="new-coffee-select" name="bodyRating">
-                           <option value="1" <%= coffee.bodyRating === 1 ? 'selected' : '' %>>1</option>
-                           <option value="2" <%= coffee.bodyRating === 2 ? 'selected' : '' %>>2</option>
-                           <option value="3" <%= coffee.bodyRating === 3 ? 'selected' : '' %>>3</option>
-                           <option value="4" <%= coffee.bodyRating === 4 ? 'selected' : '' %>>4</option>
-                           <option value="5" <%= coffee.bodyRating === 5 ? 'selected' : '' %>>5</option>
-                         </select>
-                      <label class="new-coffee-label" for="balance">Balance: </label>
-                        <select class="new-coffee-select" name="balance">
-                          <option value="1" <%= coffee.balance === 1 ? 'selected' : '' %>>1</option>
-                          <option value="2" <%= coffee.balance === 2 ? 'selected' : '' %>>2</option>
-                          <option value="3" <%= coffee.balance === 3 ? 'selected' : '' %>>3</option>
-                          <option value="4" <%= coffee.balance === 4 ? 'selected' : '' %>>4</option>
-                          <option value="5" <%= coffee.balance === 5 ? 'selected' : '' %>>5</option>
-                        </select>
-                      <label class="new-coffee-label" for="sweetness">Sweetness: </label>
-                        <select class="new-coffee-select" name="sweetness">
-                          <option value="1" <%= coffee.sweetness === 1 ? 'selected' : '' %>>1</option>
-                          <option value="2" <%= coffee.sweetness === 2 ? 'selected' : '' %>>2</option>
-                          <option value="3" <%= coffee.sweetness === 3 ? 'selected' : '' %>>3</option>
-                          <option value="4" <%= coffee.sweetness === 4 ? 'selected' : '' %>>4</option>
-                          <option value="5" <%= coffee.sweetness === 5 ? 'selected' : '' %>>5</option>
-                       </select>
-                    </div>
-
-            </div>
-
-           
-            <!-- wrapper for inputs -->
-
-                <hr class="coffee-card-hr">
-
-                <div class="new-coffee-text-area-wrapper">
-                   <label class="new-coffee-label" for="review">Review: </label>
-                   <textarea class="new-coffee-text-area" name="initReview" cols="80" rows="10"><%=coffee.initReview%></textarea>
-                </div>
-
-                <div class="new-coffee-file-input-wrapper">
-                   <input class="new-coffee-file-input" type="file" name="image" id="imageUpload" accept="image/*">
-                </div>
-
-                <br>
-                <button class="landing-btns" type="submit">Save Changes</button>
-            </form>
-            <button class="cancel-edit-coffee-btn landing-btns" type="button">Cancel</button>
-          </div>
 
           <!-- edit container hidden -->
              <%}%>
@@ -141,6 +63,87 @@
                  <button type="submit" class="add-favourite-btn show-btn">Add to your favourites</button>
               </form>
               <%}%>
+     </div>
+     <div class="edit-coffee-container hidden">
+      <form  class="edit-coffee-form" action="/coffee/<%=coffee._id%>?_method=PUT" method="post" enctype="multipart/form-data" autocomplete="off">
+        <h4 class="edit-coffee-heading">Edit your post:</h4>
+
+        <div class="edit-coffee-inputs-wrapper">
+        
+              <div class="edit-coffee-headings-wrapper">
+                 <label class="new-coffee-label" for="name">Name: </label>
+                 <input class="new-coffee-input" type="text" name="name" value="<%=coffee.name%>">
+                 <label class="new-coffee-label" for="roaster">Roaster: </label>
+                 <input class="new-coffee-input" type="text" value="<%=coffee.roaster%>" name="roaster">
+                 <label class="new-coffee-label" for="roastDate">Roast Date: </label>
+                 <input class="date-picker" type="datetime-local" value="<%= defaultRoastDate%>" name="roastDate" />
+              </div>
+
+              <div class="edit-coffee-ratings-wrapper">
+                <label class="new-coffee-label" for="aroma">Aroma: </label>
+                  <select class="new-coffee-select" name="aroma">
+                     <option value="1" <%= coffee.aroma === 1 ? 'selected' : '' %>>1</option>
+                     <option value="2"<%= coffee.aroma === 2 ? 'selected' : '' %>>2</option>
+                     <option value="3"<%= coffee.aroma === 3 ? 'selected' : '' %>>3</option>
+                     <option value="4"<%= coffee.aroma === 4 ? 'selected' : '' %>>4</option>
+                     <option value="5"<%= coffee.aroma === 5 ? 'selected' : '' %>>5</option>
+                   </select>
+                <label class="new-coffee-label" for="acidity">Acidity: </label>
+                  <select class="new-coffee-select" name="acidity">
+                     <option value="1" <%= coffee.acidity === 1 ? 'selected' : '' %>>1</option>
+                     <option value="2" <%= coffee.acidity === 2 ? 'selected' : '' %>>2</option>
+                     <option value="3" <%= coffee.acidity === 3 ? 'selected' : '' %>>3</option>
+                     <option value="4" <%= coffee.acidity === 4 ? 'selected' : '' %>>4</option>
+                     <option value="5" <%= coffee.acidity === 5 ? 'selected' : '' %>>5</option>
+                   </select>
+                <label class="new-coffee-label" for="bodyRating">Body: </label>
+                  <select class="new-coffee-select" name="bodyRating">
+                     <option value="1" <%= coffee.bodyRating === 1 ? 'selected' : '' %>>1</option>
+                     <option value="2" <%= coffee.bodyRating === 2 ? 'selected' : '' %>>2</option>
+                     <option value="3" <%= coffee.bodyRating === 3 ? 'selected' : '' %>>3</option>
+                     <option value="4" <%= coffee.bodyRating === 4 ? 'selected' : '' %>>4</option>
+                     <option value="5" <%= coffee.bodyRating === 5 ? 'selected' : '' %>>5</option>
+                   </select>
+                <label class="new-coffee-label" for="balance">Balance: </label>
+                  <select class="new-coffee-select" name="balance">
+                    <option value="1" <%= coffee.balance === 1 ? 'selected' : '' %>>1</option>
+                    <option value="2" <%= coffee.balance === 2 ? 'selected' : '' %>>2</option>
+                    <option value="3" <%= coffee.balance === 3 ? 'selected' : '' %>>3</option>
+                    <option value="4" <%= coffee.balance === 4 ? 'selected' : '' %>>4</option>
+                    <option value="5" <%= coffee.balance === 5 ? 'selected' : '' %>>5</option>
+                  </select>
+                <label class="new-coffee-label" for="sweetness">Sweetness: </label>
+                  <select class="new-coffee-select" name="sweetness">
+                    <option value="1" <%= coffee.sweetness === 1 ? 'selected' : '' %>>1</option>
+                    <option value="2" <%= coffee.sweetness === 2 ? 'selected' : '' %>>2</option>
+                    <option value="3" <%= coffee.sweetness === 3 ? 'selected' : '' %>>3</option>
+                    <option value="4" <%= coffee.sweetness === 4 ? 'selected' : '' %>>4</option>
+                    <option value="5" <%= coffee.sweetness === 5 ? 'selected' : '' %>>5</option>
+                 </select>
+              </div>
+
+        </div>
+
+     
+      <!-- wrapper for inputs -->
+
+          <hr class="coffee-card-hr">
+
+          <div class="new-coffee-text-area-wrapper">
+             <label class="new-coffee-label" for="review">Review: </label>
+             <textarea class="new-coffee-text-area" name="initReview" cols="80" rows="10"><%=coffee.initReview%></textarea>
+          </div>
+
+          <div class="new-coffee-file-input-wrapper">
+             <input class="new-coffee-file-input" type="file" name="image" id="imageUpload" accept="image/*">
+          </div>
+
+          <br>
+          <button class="landing-btns" type="submit">Save Changes</button>
+      </form>
+      <button class="cancel-edit-coffee-btn landing-btns" type="button">Cancel</button>
+    </div>
+     <!-- closing coffee card -->
 </div>
 
 <!-- show coffee wrapper -->
@@ -233,7 +236,7 @@
          </form>
       <%}%>
       <%if(!user){%>
-        <h2>Log in to leave a review!</h2>
+        <h2 class="error-txt">Log in to leave a review!</h2>
       <%}%>
       
     </div>
@@ -249,6 +252,7 @@
 
 const editCoffeeBtn = document.querySelector('.edit-coffee-btn');
 const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
+const newReviewForm = document.querySelector('.new-coffee-review-form')
  
 
 
@@ -263,7 +267,10 @@ const cancelEditCoffeeBtn = document.querySelector('.cancel-edit-coffee-btn');
 
 
 
- function handleEditCoffeeBtn(){
+ function handleEditCoffeeBtn(e){
+  console.log(e.target)
+   
+   newReviewForm.classList.toggle('hidden')
    editCoffeeContainer.classList.toggle('hidden')
    coffeeCard.classList.toggle('hidden')
  }

@@ -36,7 +36,7 @@ const coffeeSchema = new Schema({
       name:{ type: String, required: true },
       roaster: { type: String, required: true },
       imageUrl: { type: String, required: false },
-      roastDate: { type: Date, default: function () {
+      roastDate: { type: Date, required: true, default: function () {
         return new Date();
       }, timeZone: 'UTC' },
       aroma: {
