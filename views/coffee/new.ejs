@@ -1,61 +1,70 @@
 <%- include('../partials/header') %>
-<% if (locals.errorMsg) { %>
-  <p><%= errorMsg %></p>
-<% } %>
-<form  class="new-coffee-form" action="/coffee" method="post" enctype="multipart/form-data" autocomplete="off">
-    <h4>Add a roast</h4>
-    <hr>
-     <label for="name">Name: </label><input type="text" name="name">
-     <label for="roaster">Roaster: </label><input type="text" name="roaster">
-     <label for="roastDate">Roast Date: </label><input type="datetime-local" value="<%= roastDate %>" name="roastDate" />
-
-     <label for="aroma">Aroma: </label>
-     <select name="aroma">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5" selected>5</option>
-      </select>
-     <label for="acidity">Acidity: </label>
-     <select name="acidity">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5" selected>5</option>
-      </select>
-     <label for="bodyRating">Body: </label>
-     <select name="bodyRating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5" selected>5</option>
-      </select>
-     <label for="balance">Balance: </label>
-     <select name="balance">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5" selected>5</option>
-      </select>
-     <label for="sweetness">Sweetness: </label>
-     <select name="sweetness">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5" selected>5</option>
-      </select>
-      <hr>
-      <label for="review">Review: </label>
-      <textarea name="initReview" cols="80" rows="10"></textarea>
-      <input type="file" name="image" id="imageUpload" accept="image/*">
-      <br>
-      <button class="landing-btns" type="submit">Publish</button>
-    </form>
+<div class="new-coffee-page-wrapper">
+  <% if (locals.errorMsg) { %>
+    <p><%= errorMsg %></p>
+  <% } %>
+  <form  class="new-coffee-form" action="/coffee" method="post" enctype="multipart/form-data" autocomplete="off">
+      <h1 class="new-coffee-heading">Add a roast</h1>
+      <hr class="coffee-card-hr">
+       <div class="new-coffee-grid-wrapper">
+         <div class="new-coffee-heading-wrapper">
+           <label class="new-coffee-label" for="name">Name: </label><input class="new-coffee-input" type="text" name="name">
+           <label class="new-coffee-label" for="roaster">Roaster: </label><input class="new-coffee-input" type="text" name="roaster">
+           <label class="new-coffee-label" for="roastDate">Roast Date: </label><input class="date-picker" type="datetime-local" value="<%= roastDate %>" name="roastDate" />
+         </div>
+         <div class="new-coffee-ratings-wrapper">
+           <label class="new-coffee-label" for="aroma">Aroma:
+           <select class="new-coffee-select" name="aroma">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+            </select> </label>
+           <label class="new-coffee-label" for="acidity">Acidity:
+           <select class="new-coffee-select" name="acidity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+            </select> </label>
+           <label class="new-coffee-label" for="bodyRating">Body:
+           <select class="new-coffee-select" name="bodyRating">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+            </select></label>
+           <label class="new-coffee-label" for="balance">Balance:
+           <select class="new-coffee-select" name="balance">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+            </select></label>
+           <label class="new-coffee-label" for="sweetness">Sweetness:
+           <select class="new-coffee-select" name="sweetness">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+            </select> </label>
+         </div>
+       </div>
+       <hr class="coffee-card-hr">
+        <div class="new-coffee-text-area-wrapper">
+            <label class="new-coffee-label" for="review">Review: </label>
+            <textarea class="new-coffee-text-area" name="initReview" cols="80" rows="10"></textarea>
+        </div>
+       <div class="new-coffee-file-input-wrapper"><label class="new-coffee-label">Image Upload:<input class="new-coffee-file-input" type="file" name="image" id="imageUpload" accept="image/*"></label></div>
+        <br>
+        <button class="landing-btns" type="submit">Publish</button>
+      </form>
+</div>
 
 
 <%- include('../partials/footer') %>
