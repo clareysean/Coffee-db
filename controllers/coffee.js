@@ -62,8 +62,6 @@ function newCoffee (req,res){
     let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
     roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
 
-    //this is the format to feed to the date input as default
-
     if(!req.user){
       res.redirect(`/auth/google`)
     }
@@ -208,9 +206,10 @@ async function deleteCoffee(req,res){
     );
 
     console.log(`${updateResult.modifiedCount} documents removed.`);
-  } catch (err) {
-    console.error('Error deleting documents:', err);
-  }
+
+    } catch (err) {
+      console.error('Error deleting documents:', err);
+    }
 
     res.redirect(`/coffee`)
 }

@@ -18,31 +18,26 @@ async function create(req, res) {
             res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
       
         } else {
-            console.log(`it didn't have the doc in it`)
             userFavouriteDoc.favourites.push(newFavouriteCoffee);
             await userFavouriteDoc.save();
             res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
-        
         }
      
-
       } else {
-
-        console.log(`didn't find a user favs doc`)
-        req.body.user = req.user._id;
-        req.body.userName = req.user.name;
-        req.body.userAvatar = req.user.avatar;
+          req.body.user = req.user._id;
+          req.body.userName = req.user.name;
+          req.body.userAvatar = req.user.avatar;
   
-        const newFavouriteDoc = await UserFavourite.create(req.body);
-        newFavouriteDoc.favourites.push(newFavouriteCoffee);
-        await newFavouriteDoc.save();
-        res.render('coffee/favourites', { coffees: newFavouriteDoc.favourites });
+          const newFavouriteDoc = await UserFavourite.create(req.body);
+          newFavouriteDoc.favourites.push(newFavouriteCoffee);
+          await newFavouriteDoc.save();
+          res.render('coffee/favourites', { coffees: newFavouriteDoc.favourites });
       }
   
       
     } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ message: 'An error occurred' });
+        console.error('Error:', error);
+        res.status(500).json({ message: 'An error occurred' });
     }
   }
   
