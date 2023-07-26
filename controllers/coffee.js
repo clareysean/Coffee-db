@@ -101,8 +101,8 @@ async function create(req, res) {
       upload(req, res, async function (err) {
         if (err) {
           console.error('Error uploading image:', err);
-          res.render('coffee/new', { errorMsg: 'Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB', roastDate: defaultRoastDate.toString});
-          return;
+          return res.render('coffee/new', { errorMsg: 'Image upload failed. Please upload a .png, .jpg or .jpeg image under 2MB', roastDate: defaultRoastDate.toString});
+          
         }
   
         if (req.file) {
@@ -115,8 +115,8 @@ async function create(req, res) {
         
         const submittedDate = new Date(req.body.roastDate);
         const todaysDate = new Date();
-        console.log(submittedDate)
-        console.log(todaysDate)
+        console.log(submittedDate);
+        console.log(todaysDate);
 
         if(submittedDate>todaysDate){
           console.error('Error creating coffee:', err);
