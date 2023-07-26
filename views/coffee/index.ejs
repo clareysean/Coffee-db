@@ -10,25 +10,25 @@
 
 
         <div class="coffee-card-heading-wrapper">
-          <a class="coffee-link" href="/coffee/<%= coffee._id %>"><h1><%= coffee.name %></h1></a>
+          <a class="coffee-link" href="/coffee/<%= coffee._id %>"><h1 class="coffee-card-name-heading"><%= coffee.name %></h1></a>
           <h2 class="coffee-subheading"><%= coffee.roaster %>&nbsp;|&nbsp;Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
           <h4 class="coffee-card-user">Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
         </div>
 
-        <p class="coffee-card-review"><span class="big-comma-1">,&nbsp;</span><%= coffee.initReview %></p>
-
-
-         <div class="scores-wrapper">
-           <h3 class="coffee-card-aroma">Aroma: <%= coffee.aroma %> </h3>
-           <h3 class="coffee-card-acidity">Acidity: <%= coffee.acidity %></h3>
-           <h3 class="coffee-card-body">Body: <%= coffee.bodyRating %> </h3>
-           <h3 class="coffee-card-balance">Balance: <%= coffee.balance %></h3>
-           <h3 class="coffee-card-sweetness">Sweetness: <%= coffee.sweetness %></h3>
-           <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
-           <h3 class="coffee-card-overall">Overall: <%= total*4 %> /100</h3>
-         </div>
+        <div class="coffee-card-middle-column">
+          <p class="coffee-card-review"><img class="comma-icon" src="/images/comma-ish-glyph-svgrepo-com.svg" alt=""><br><%= coffee.initReview %></p>
+           <div class="scores-wrapper">
+             <h3 class="coffee-card-aroma">Aroma: <%= coffee.aroma %> </h3>
+             <h3 class="coffee-card-acidity">Acidity: <%= coffee.acidity %></h3>
+             <h3 class="coffee-card-body">Body: <%= coffee.bodyRating %> </h3>
+             <h3 class="coffee-card-balance">Balance: <%= coffee.balance %></h3>
+             <h3 class="coffee-card-sweetness">Sweetness: <%= coffee.sweetness %></h3>
+             <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
+             <h3 class="coffee-card-overall">Overall: <%= total*4 %> /100</h3>
+           </div>
+        </div>
   
-        <img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image">
+        <div class="coffee-card-image-wrapper"><img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image"></div>
        
       </div>
       <hr class="coffee-card-hr">
