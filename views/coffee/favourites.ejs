@@ -34,7 +34,7 @@
         <div class="coffee-card-image-wrapper"><img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image"></div>
       
         <div class="delete-favourite-form-wrapper">
-          <form action="/coffee/favourites/<%= coffee._id %>?_method=DELETE" method="POST">
+          <form class="delete-favourite-form" action="/coffee/favourites/<%= coffee._id %>?_method=DELETE" method="POST">
             <button class="landing-btns delete-favourite-btn" type="submit">Remove from favourites</button>
           </form>
         </div>

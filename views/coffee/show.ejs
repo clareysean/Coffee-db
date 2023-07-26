@@ -1,142 +1,164 @@
 <%- include('../partials/header') %>
 
 
-  <div class="show-coffee-wrapper">
-    <h1 class="show-heading">Details</h1>
-    
-    <div class="coffee-card show-coffee-card">
-      <hr class="coffee-card-hr show-hr-top">
-      <%if(locals.errorMsg){%>
-        <p class="error-txt"><%=errorMsg%></p>
-        <%}%>
-      <img class="coffee-user-icon" src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
-      <div class="coffee-card-heading-wrapper">
-        <h1 class="coffee-card-name-heading"><%= coffee.name %></h1>
-        <h2 class="coffee-subheading"><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
-        <h4 class="coffee-card-user">Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
-      </div>
-      <div class="coffee-card-middle-column">
-        <p class="coffee-card-review"><img class="comma-icon" src="/images/comma-ish-glyph-svgrepo-com.svg" alt=""><br><%= coffee.initReview %></p>
-        <div class="scores-wrapper">
-          <h3 class="coffee-card-aroma">Aroma: <%= coffee.aroma %> </h3>
-          <h3 class="coffee-card-acidity">Acidity: <%= coffee.acidity %></h3>
-          <h3 class="coffee-card-body">Body: <%= coffee.bodyRating %> </h3>
-          <h3 class="coffee-card-balance">Balance: <%= coffee.balance %></h3>
-          <h3 class="coffee-card-sweetness">Sweetness: <%= coffee.sweetness %></h3>
-          <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
-          <% total *= 4 %>
-          <h3 class="coffee-card-overall">Overall: <%= total %> /100</h3>
+
+<div class="show-coffee-wrapper">
+      <h1 class="show-heading">Details</h1>
+      
+   <div class="coffee-card show-coffee-card">
+          <hr class="coffee-card-hr show-hr-top">
+          <%if(locals.errorMsg){%>
+          <p class="error-txt"><%=errorMsg%></p>
+          <%}%>
+          <img class="coffee-user-icon" src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
+
+          <div class="coffee-card-heading-wrapper">
+             <h1 class="coffee-card-name-heading"><%= coffee.name %></h1>
+             <h2 class="coffee-subheading"><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
+             <h4 class="coffee-card-user">Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
+          </div>
+
+          <div class="coffee-card-middle-column">
+            <p class="coffee-card-review"><img class="comma-icon" src="/images/comma-ish-glyph-svgrepo-com.svg" alt=""><br><%= coffee.initReview %></p>
+
+              <div class="scores-wrapper">
+                 <h3 class="coffee-card-aroma">Aroma: <%= coffee.aroma %> </h3>
+                 <h3 class="coffee-card-acidity">Acidity: <%= coffee.acidity %></h3>
+                 <h3 class="coffee-card-body">Body: <%= coffee.bodyRating %> </h3>
+                 <h3 class="coffee-card-balance">Balance: <%= coffee.balance %></h3>
+                 <h3 class="coffee-card-sweetness">Sweetness: <%= coffee.sweetness %></h3>
+                 <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
+                 <% total *= 4 %>
+                 <h3 class="coffee-card-overall">Overall: <%= total %> /100</h3>
+               </div>
+
+          </div>
+      
+        <div class="coffee-card-image-wrapper">
+          <img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image">
         </div>
-      </div>
-    
-      <div class="coffee-card-image-wrapper"><img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image"></div>
-    
-      <% if (user?._id.equals(coffee.user)) { %>
-        <div class="show-coffee-button-row">
-          <form action="/coffee/<%= coffee._id %>?_method=DELETE" method="post">
-            <button class="show-btn" type="submit">Delete your CoffeeDB entry</button>
-          </form>
-          <button class="edit-coffee-btn show-btn">Edit your CoffeeDB entry</button>
-          <%if(user){%>
-            <form action="/coffee/favourites/<%=coffee._id%>" method="post">
-               <button type="submit" class="add-favourite-btn show-btn">Add to your favourites</button>
+      
+        <% if (user?._id.equals(coffee.user)) { %>
+          <div class="show-coffee-button-row">
+            <form action="/coffee/<%= coffee._id %>?_method=DELETE" method="post">
+              <button class="show-btn" type="submit">Delete your CoffeeDB entry</button>
             </form>
-                 <%}%>
-        </div>
-        <hr class="coffee-card-hr show-hr-bottom">
+            <button class="edit-coffee-btn show-btn">Edit your CoffeeDB entry</button>
+         
+              <form action="/coffee/favourites/<%=coffee._id%>" method="post">
+                 <button type="submit" class="add-favourite-btn show-btn">Add to your favourites</button>
+              </form>
+      
+          </div>
+
+          <hr class="coffee-card-hr show-hr-bottom">
+      
     </div>
-    
+          <div class="edit-coffee-container hidden">
+            <form  class="edit-coffee-form" action="/coffee/<%=coffee._id%>?_method=PUT" method="post" enctype="multipart/form-data" autocomplete="off">
+              <h4 class="edit-coffee-heading">Edit your post:</h4>
+      
+              <div class="edit-coffee-inputs-wrapper">
+              
+                    <div class="edit-coffee-headings-wrapper">
+                       <label class="new-coffee-label" for="name">Name: </label>
+                       <input class="new-coffee-input" type="text" name="name" value="<%=coffee.name%>">
+                       <label class="new-coffee-label" for="roaster">Roaster: </label>
+                       <input class="new-coffee-input" type="text" value="<%=coffee.roaster%>" name="roaster">
+                       <label class="new-coffee-label" for="roastDate">Roast Date: </label>
+                       <input class="date-picker" type="datetime-local" value="<%= roastDate %>" name="roastDate" />
+                    </div>
 
-        <div class="edit-coffee-container hidden">
-          <form  class="edit-coffee-form" action="/coffee/<%=coffee._id%>?_method=PUT" method="post" enctype="multipart/form-data" autocomplete="off">
-          <h4 class="edit-coffee-heading">Edit your post:</h4>
-          
-           <div class="edit-coffee-inputs-wrapper">
+                    <div class="edit-coffee-ratings-wrapper">
+                      <label class="new-coffee-label" for="aroma">Aroma: </label>
+                        <select class="new-coffee-select" name="aroma">
+                           <option value="1" <%= coffee.aroma === 1 ? 'selected' : '' %>>1</option>
+                           <option value="2"<%= coffee.aroma === 2 ? 'selected' : '' %>>2</option>
+                           <option value="3"<%= coffee.aroma === 3 ? 'selected' : '' %>>3</option>
+                           <option value="4"<%= coffee.aroma === 4 ? 'selected' : '' %>>4</option>
+                           <option value="5"<%= coffee.aroma === 5 ? 'selected' : '' %>>5</option>
+                         </select>
+                      <label class="new-coffee-label" for="acidity">Acidity: </label>
+                        <select class="new-coffee-select" name="acidity">
+                           <option value="1" <%= coffee.acidity === 1 ? 'selected' : '' %>>1</option>
+                           <option value="2" <%= coffee.acidity === 2 ? 'selected' : '' %>>2</option>
+                           <option value="3" <%= coffee.acidity === 3 ? 'selected' : '' %>>3</option>
+                           <option value="4" <%= coffee.acidity === 4 ? 'selected' : '' %>>4</option>
+                           <option value="5" <%= coffee.acidity === 5 ? 'selected' : '' %>>5</option>
+                         </select>
+                      <label class="new-coffee-label" for="bodyRating">Body: </label>
+                        <select class="new-coffee-select" name="bodyRating">
+                           <option value="1" <%= coffee.bodyRating === 1 ? 'selected' : '' %>>1</option>
+                           <option value="2" <%= coffee.bodyRating === 2 ? 'selected' : '' %>>2</option>
+                           <option value="3" <%= coffee.bodyRating === 3 ? 'selected' : '' %>>3</option>
+                           <option value="4" <%= coffee.bodyRating === 4 ? 'selected' : '' %>>4</option>
+                           <option value="5" <%= coffee.bodyRating === 5 ? 'selected' : '' %>>5</option>
+                         </select>
+                      <label class="new-coffee-label" for="balance">Balance: </label>
+                        <select class="new-coffee-select" name="balance">
+                          <option value="1" <%= coffee.balance === 1 ? 'selected' : '' %>>1</option>
+                          <option value="2" <%= coffee.balance === 2 ? 'selected' : '' %>>2</option>
+                          <option value="3" <%= coffee.balance === 3 ? 'selected' : '' %>>3</option>
+                          <option value="4" <%= coffee.balance === 4 ? 'selected' : '' %>>4</option>
+                          <option value="5" <%= coffee.balance === 5 ? 'selected' : '' %>>5</option>
+                        </select>
+                      <label class="new-coffee-label" for="sweetness">Sweetness: </label>
+                        <select class="new-coffee-select" name="sweetness">
+                          <option value="1" <%= coffee.sweetness === 1 ? 'selected' : '' %>>1</option>
+                          <option value="2" <%= coffee.sweetness === 2 ? 'selected' : '' %>>2</option>
+                          <option value="3" <%= coffee.sweetness === 3 ? 'selected' : '' %>>3</option>
+                          <option value="4" <%= coffee.sweetness === 4 ? 'selected' : '' %>>4</option>
+                          <option value="5" <%= coffee.sweetness === 5 ? 'selected' : '' %>>5</option>
+                       </select>
+                    </div>
 
-             <div class="edit-coffee-headings-wrapper">
-               <label class="new-coffee-label" for="name">Name: </label>
-               <input class="new-coffee-input" type="text" name="name" value="<%=coffee.name%>">
-               <label class="new-coffee-label" for="roaster">Roaster: </label>
-               <input class="new-coffee-input" type="text" value="<%=coffee.roaster%>" name="roaster">
-               <label class="new-coffee-label" for="roastDate">Roast Date: </label>
-               <input class="date-picker" type="datetime-local" value="<%= roastDate %>" name="roastDate" />
-             </div>
-
-
-             <div class="edit-coffee-ratings-wrapper">
-               <label class="new-coffee-label" for="aroma">Aroma: </label>
-               <select class="new-coffee-select" name="aroma">
-                  <option value="1" <%= coffee.aroma === 1 ? 'selected' : '' %>>1</option>
-                  <option value="2"<%= coffee.aroma === 2 ? 'selected' : '' %>>2</option>
-                  <option value="3"<%= coffee.aroma === 3 ? 'selected' : '' %>>3</option>
-                  <option value="4"<%= coffee.aroma === 4 ? 'selected' : '' %>>4</option>
-                  <option value="5"<%= coffee.aroma === 5 ? 'selected' : '' %>>5</option>
-                </select>
-               <label class="new-coffee-label" for="acidity">Acidity: </label>
-               <select class="new-coffee-select" name="acidity">
-                  <option value="1" <%= coffee.acidity === 1 ? 'selected' : '' %>>1</option>
-                  <option value="2" <%= coffee.acidity === 2 ? 'selected' : '' %>>2</option>
-                  <option value="3" <%= coffee.acidity === 3 ? 'selected' : '' %>>3</option>
-                  <option value="4" <%= coffee.acidity === 4 ? 'selected' : '' %>>4</option>
-                  <option value="5" <%= coffee.acidity === 5 ? 'selected' : '' %>>5</option>
-                </select>
-               <label class="new-coffee-label" for="bodyRating">Body: </label>
-               <select class="new-coffee-select" name="bodyRating">
-                  <option value="1" <%= coffee.bodyRating === 1 ? 'selected' : '' %>>1</option>
-                  <option value="2" <%= coffee.bodyRating === 2 ? 'selected' : '' %>>2</option>
-                  <option value="3" <%= coffee.bodyRating === 3 ? 'selected' : '' %>>3</option>
-                  <option value="4" <%= coffee.bodyRating === 4 ? 'selected' : '' %>>4</option>
-                  <option value="5" <%= coffee.bodyRating === 5 ? 'selected' : '' %>>5</option>
-                </select>
-               <label class="new-coffee-label" for="balance">Balance: </label>
-               <select class="new-coffee-select" name="balance">
-                 <option value="1" <%= coffee.balance === 1 ? 'selected' : '' %>>1</option>
-                 <option value="2" <%= coffee.balance === 2 ? 'selected' : '' %>>2</option>
-                 <option value="3" <%= coffee.balance === 3 ? 'selected' : '' %>>3</option>
-                 <option value="4" <%= coffee.balance === 4 ? 'selected' : '' %>>4</option>
-                 <option value="5" <%= coffee.balance === 5 ? 'selected' : '' %>>5</option>
-               </select>
-               <label class="new-coffee-label" for="sweetness">Sweetness: </label>
-               <select class="new-coffee-select" name="sweetness">
-                 <option value="1" <%= coffee.sweetness === 1 ? 'selected' : '' %>>1</option>
-                 <option value="2" <%= coffee.sweetness === 2 ? 'selected' : '' %>>2</option>
-                 <option value="3" <%= coffee.sweetness === 3 ? 'selected' : '' %>>3</option>
-                 <option value="4" <%= coffee.sweetness === 4 ? 'selected' : '' %>>4</option>
-                 <option value="5" <%= coffee.sweetness === 5 ? 'selected' : '' %>>5</option>
-               </select>
-             </div>
-           </div>
-
-
-            <hr class="coffee-card-hr">
-
-            <div class="new-coffee-text-area-wrapper">
-              <label class="new-coffee-label" for="review">Review: </label>
-              <textarea class="new-coffee-text-area" name="initReview" cols="80" rows="10"><%=coffee.initReview%></textarea>
             </div>
 
-            <div class="new-coffee-file-input-wrapper"><input class="new-coffee-file-input" type="file" name="image" id="imageUpload" accept="image/*"></div>
-            <br>
-            <button class="landing-btns" type="submit">Save Changes</button>
-          </form>
-          <button class="cancel-edit-coffee-btn landing-btns" type="button">Cancel</button></div>
-           <%}%>
-         </div>
-         <h2 class="reviews-heading">Reviews</h2>
-         <hr class="review-hr">
-  <div class="reviews-wrapper">
-      
+           
+            <!-- wrapper for inputs -->
 
+                <hr class="coffee-card-hr">
+
+                <div class="new-coffee-text-area-wrapper">
+                   <label class="new-coffee-label" for="review">Review: </label>
+                   <textarea class="new-coffee-text-area" name="initReview" cols="80" rows="10"><%=coffee.initReview%></textarea>
+                </div>
+
+                <div class="new-coffee-file-input-wrapper">
+                   <input class="new-coffee-file-input" type="file" name="image" id="imageUpload" accept="image/*">
+                </div>
+
+                <br>
+                <button class="landing-btns" type="submit">Save Changes</button>
+            </form>
+            <button class="cancel-edit-coffee-btn landing-btns" type="button">Cancel</button>
+          </div>
+
+          <!-- edit container hidden -->
+             <%}%>
+             <%if(user && !user._id.equals(coffee.user)){%>
+              <form action="/coffee/favourites/<%=coffee._id%>" method="post">
+                 <button type="submit" class="add-favourite-btn show-btn">Add to your favourites</button>
+              </form>
+              <%}%>
+</div>
+
+<!-- show coffee wrapper -->
+
+         <h2 class="reviews-heading">Reviews</h2>
+         <!-- <hr class="review-hr"> -->
+  
+  
+     <div class="reviews-wrapper">
       
       <%if(coffee.reviews.length){ %>
           <% coffee.reviews.forEach((r,i) => { %>
             <div class="review-card" data-idx="<%=i%>">
-
+              <hr class="coffee-card-hr">
                  <div class="review-card-left-column">
                    <img class="review-card-user-img" alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer">
                    <h2 class="review-user-heading"><%= r.userName %></h2>
                  </div>
-
 
                   <div class="review-card-middle-column">
                     <h2>Rating: <%= r.rating %> /5</h2>
@@ -151,10 +173,11 @@
                     <button class="edit-review-btn review-btn" data-idx="<%=i%>">Edit your review</button>
                  </div>
               <% } %>
-              <hr class="coffee-card-hr">
-            </div>
-            <div class="edit-form-container hidden" data-idx="<%=i%>">
               
+            </div>
+
+            <div class="edit-form-container hidden" data-idx="<%=i%>">
+              <hr class="coffee-card-hr">
               <form class="edit-review-form-flex-container" action="/review/<%=coffee._id %>/<%=r._id %>?_method=PUT" method="POST">
 
                 <div class="edit-review-left-column">
@@ -186,19 +209,27 @@
           <%}%>
       
            <%if(user){%>
-           <form id="add-review-form" method="post"
+           <form class="new-coffee-review-form" id="add-review-form" method="post"
            action="/coffee/<%= coffee._id %>/reviews">
-           <label>Leave a review:</label>
-           <label>Rating:</label>
-           <select name="rating">
-             <option value="1">1</option>
-             <option value="2">2</option>
-             <option value="3">3</option>
-             <option value="4">4</option>
-             <option value="5" selected>5</option>
-           </select>
-           <textarea name="content" cols="80" rows="10"></textarea> <br><br>
-           <button class="landing-btns" type="submit" value="Add Review">Add Review</button> <br><br>
+             <h2>Leave a review:</h2>
+
+             <div class="new-review-ratings-wrapper">
+               <label class="new-coffee-label">Rating:</label>
+               <select class="new-coffee-select" name="rating">
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5" selected>5</option>
+               </select>
+             </div>
+
+             
+                <textarea class="new-review-text-area" name="content" cols="80" rows="10"></textarea>
+             
+          
+            <br><br>
+             <button class="landing-btns" type="submit" value="Add Review">Add Review</button> <br><br>
          </form>
       <%}%>
       <%if(!user){%>
@@ -206,9 +237,8 @@
       <%}%>
       
     </div>
-  </div>
-
-
+    <!-- reviews wrapper -->
+  
 
 <script>
  const editReviewBtns = [...document.querySelectorAll('.edit-review-btn')];
