@@ -25,7 +25,7 @@ function newCoffee (req,res){
     const rD = coffeeForDefaultDate.roastDate;
 
     let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-    roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
+    roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5).toLocaleString()}`;
 
     if(!req.user){
       res.redirect(`/auth/google`)
@@ -96,11 +96,10 @@ async function create(req, res) {
   console.log(req.body)
 
       const coffee = await Coffee.findById(req.params.id);
-      // console.log()
-      const roastDate = coffee.roastDate;
-
-      // let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-      // roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
+  
+      const rD = coffee.roastDate;
+      let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
+      roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
 
       const updatedDate = new Date(req.body.roastDate);
       const todaysDate = new Date();
@@ -110,22 +109,30 @@ async function create(req, res) {
         res.render('coffee/show', { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed: The roast date cannot be in the future!'});
         return;
       }
-       
-      if(!req.body.name || !req.body.roaster || !req.body.initReview){
 
-        // maybe add guard against missing image link
+      if (req.body.imageUrl) {
+        if (!/^http:\/\/.*/.test(req.body.imageUrl)) {
+          console.error('Invalid imageUrl:', req.body.imageUrl);
+          res.render('coffee/show', { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Invalid Image URL format!' });
+          return;
+        }
+      }
+
+      if(!req.body.imageUrl || !req.body.name || !req.body.roaster || !req.body.initReview){
+
         console.log(`guard one`)
-        res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields; please provide a name, a roaster, and a date for your entry!' });
+        res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields!' });
         return;
       }
       
         try{
+
           await Coffee.findOneAndUpdate({'_id': req.params.id}, {$set: req.body});
           res.redirect(`/coffee/${req.params.id}`)
       } catch(err){
           console.error(err);
           console.log(`guard two`)
-          res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields; please provide a name, a roaster, and a date for your entry!' });
+          res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields!' });
           return;
       }
     }
