@@ -518,11 +518,15 @@ margin-top: 0;
 }
 
 .review-card-user-img{
-  height: 75px;
+  height: 80px;
+  border-radius: 50%;
 }
 
 .new-coffee-label{
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .new-coffee-input{
@@ -570,18 +574,17 @@ margin-top: 0;
   margin-top: 30px;
 }
 
-
 .new-coffee-file-input{
   border: none;
   border-radius: 5px;
   opacity: 80%;
   font-size: 0.9rem;
   width: 200px;
-  margin-top: 30px;
+  height: 25px;
+  margin: 0 5px;
 }
 
 .new-coffee-file-input-wrapper{
-  width: 20px;
   margin: 30px auto 20px auto;
   display: flex;
   flex-direction: column;
@@ -603,6 +606,7 @@ margin-top: 0;
   height: 30px;
   width: 160px;
   margin-left: 0;
+  border-radius: 4px;
 }
 /* show page */
 
