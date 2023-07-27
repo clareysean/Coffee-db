@@ -4,6 +4,8 @@
 
 CoffeeDB is a web app built using Express, Node.js, EJS, Mongoose, and MongoDB where users can interact with a coffee database. Users can add their favorite coffee roasts, review existing roasts, edit their posts and reviews, and build a favorites list of roasts.
 
+## Visit Deployed Page: [here](https://coffeedb-8dceb2e9375b.herokuapp.com/)
+
 ## Table of Contents
 
 - [Features](#features)

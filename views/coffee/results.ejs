@@ -27,7 +27,7 @@
                <h3 class="coffee-card-balance">Balance: <%= coffee.balance %></h3>
                <h3 class="coffee-card-sweetness">Sweetness: <%= coffee.sweetness %></h3>
                 <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
-               <h3 class="coffee-card-overall">Overall: <%= total %> /100</h3>
+               <h3 class="coffee-card-overall">Overall: <%= total*4 %> /100</h3>
             </div>
   
           </div>
