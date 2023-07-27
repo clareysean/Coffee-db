@@ -1,6 +1,5 @@
 const Coffee = require('../models/coffee');
 const FavDoc = require('../models/favourite')
-const mongoose = require('mongoose')
 
 module.exports = {
   index,
@@ -15,7 +14,6 @@ module.exports = {
 
 async function index(req,res){
     const coffees = await Coffee.find({});
-
     res.render('coffee/index', { coffees })
 }
 
@@ -36,7 +34,6 @@ function newCoffee (req,res){
 
 async function show(req, res) {
   try {
-
       const coffee = await Coffee.findById(req.params.id);
       console.log(req.params.id);
       console.log(coffee);
@@ -109,7 +106,6 @@ async function create(req, res) {
         res.render('coffee/show', { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed: The roast date cannot be in the future!'});
         return;
       }
-
       if (req.body.imageUrl) {
         if (!/^http:\/\/.*/.test(req.body.imageUrl)) {
           console.error('Invalid imageUrl:', req.body.imageUrl);
@@ -117,16 +113,12 @@ async function create(req, res) {
           return;
         }
       }
-
       if(!req.body.imageUrl || !req.body.name || !req.body.roaster || !req.body.initReview || !req.body.roastDate || req.body.roastDate === null){
-
         console.log(`guard one`)
         res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields!' });
         return;
       }
-      
         try{
-
           await Coffee.findOneAndUpdate({'_id': req.params.id}, {$set: req.body});
           res.redirect(`/coffee/${req.params.id}`)
       } catch(err){

@@ -12,7 +12,7 @@ async function create(req, res) {
   
     try {
       const userFavouriteDoc = await UserFavourite.findOne({ user: req.user._id });
-  
+
       if (userFavouriteDoc) { 
         if(userFavouriteDoc.favourites.some(fav => fav._id.equals(newFavouriteCoffee._id))){
             res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
@@ -21,8 +21,7 @@ async function create(req, res) {
             userFavouriteDoc.favourites.push(newFavouriteCoffee);
             await userFavouriteDoc.save();
             res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
-        }
-     
+        }    
       } else {
           req.body.user = req.user._id;
           req.body.userName = req.user.name;
@@ -32,9 +31,7 @@ async function create(req, res) {
           newFavouriteDoc.favourites.push(newFavouriteCoffee);
           await newFavouriteDoc.save();
           res.render('coffee/favourites', { coffees: newFavouriteDoc.favourites });
-      }
-  
-      
+      }    
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ message: 'An error occurred' });

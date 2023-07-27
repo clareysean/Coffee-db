@@ -54,7 +54,6 @@ module.exports = {
           arrayFilters: [{ 'review._id': req.params.reviewId }]
         }
       ), (error,doc)=>{
-           console.log(`in the callback`);
            console.log(doc);
       };
         res.redirect(`/coffee/${req.params.coffeeId}`)
