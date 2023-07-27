@@ -118,7 +118,7 @@ async function create(req, res) {
         }
       }
 
-      if(!req.body.imageUrl || !req.body.name || !req.body.roaster || !req.body.initReview){
+      if(!req.body.imageUrl || !req.body.name || !req.body.roaster || !req.body.initReview || !req.body.roastDate || req.body.roastDate === null){
 
         console.log(`guard one`)
         res.render(`coffee/show`, { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed due to missing fields!' });
