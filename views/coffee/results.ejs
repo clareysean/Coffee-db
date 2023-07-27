@@ -3,6 +3,9 @@
 <div class="results-wrapper">
   <% if (coffees.length) { %>
     <% coffees.forEach((coffee) => { %>
+
+      <% let displayDate = new Date(coffee.roastDate).toLocaleDateString().slice(0, 10); %>
+
       <hr class="coffee-card-hr">
       <div class="coffee-card">
   
@@ -10,7 +13,7 @@
   
           <div class="coffee-card-heading-wrapper">
             <a class="coffee-link" href="/coffee/<%= coffee._id %>"><h1 class="coffee-card-name-heading"><%= coffee.name %></h1></a>
-            <h2 class="coffee-subheading"><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
+            <h2 class="coffee-subheading"><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= displayDate %></h2>
             <h4 class="coffee-card-user">Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
           </div>
   
@@ -23,13 +26,13 @@
                <h3 class="coffee-card-body">Body: <%= coffee.bodyRating %> </h3>
                <h3 class="coffee-card-balance">Balance: <%= coffee.balance %></h3>
                <h3 class="coffee-card-sweetness">Sweetness: <%= coffee.sweetness %></h3>
-               <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
+                <% let total = coffee.aroma + coffee.acidity + coffee.bodyRating + coffee.balance + coffee.sweetness %>
                <h3 class="coffee-card-overall">Overall: <%= total %> /100</h3>
             </div>
   
           </div>
   
-          <div class="coffee-card-image-wrapper"><img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image"></div>
+          <div class="coffee-card-image-wrapper"><img class="coffee-card-img" src="<%= coffee.imageUrl %>" onerror="this.onerror=null; this.src='/images/broken-link-svgrepo-com.svg'" alt="coffee image"></div>
   
   
       </div>

@@ -3,7 +3,7 @@
   <% if (locals.errorMsg) { %>
     <p class="error-txt"><%= errorMsg %></p>
   <% } %>
-  <form  class="new-coffee-form" action="/coffee" method="post" enctype="multipart/form-data" autocomplete="off">
+  <form  class="new-coffee-form" action="/coffee" method="post" autocomplete="off">
       <h1 class="new-coffee-heading">Add a roast</h1>
       <hr class="coffee-card-hr">
        <div class="new-coffee-grid-wrapper">
@@ -60,7 +60,10 @@
             <label class="new-coffee-label" for="review">Review: </label>
             <textarea class="new-coffee-text-area" name="initReview" cols="80" rows="10"></textarea>
         </div>
-       <div class="new-coffee-file-input-wrapper"><label class="new-coffee-label">Image Upload:<input class="new-coffee-file-input" type="file" name="image" id="imageUpload" accept="image/*"></label></div>
+          <div class="new-coffee-file-input-wrapper">
+            <label class="new-coffee-label">Image Url:
+              <input class="new-coffee-file-input" type="text" name="imageUrl" id="imageUpload"></label>
+          </div>
         <br>
         <button class="landing-btns" type="submit">Publish</button>
       </form>

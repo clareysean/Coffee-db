@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-
+<% let displayDate = new Date(coffee.roastDate).toLocaleDateString().slice(0, 10); %>
 
 <div class="show-coffee-wrapper">
       <h1 class="show-heading">Details:</h1>
@@ -13,7 +13,7 @@
 
           <div class="coffee-card-heading-wrapper">
              <h1 class="coffee-card-name-heading"><%= coffee.name %></h1>
-             <h2 class="coffee-subheading"><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
+             <h2 class="coffee-subheading"><%= coffee.roaster %></h2>&nbsp;|&nbsp;<h2>Roast date: <%= displayDate %></h2>
              <h4 class="coffee-card-user">Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
           </div>
 
@@ -34,7 +34,7 @@
           </div>
       
         <div class="coffee-card-image-wrapper">
-          <img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image">
+          <img class="coffee-card-img" src="<%= coffee.imageUrl %>" onerror="this.onerror=null; this.src='/images/broken-link-svgrepo-com.svg'" alt="coffee image">
         </div>
       
         <% if (user?._id.equals(coffee.user)) { %>
@@ -59,7 +59,7 @@
               <%}%>
      </div>
      <div class="edit-coffee-container hidden">
-      <form  class="edit-coffee-form" action="/coffee/<%=coffee._id%>?_method=PUT" method="post" enctype="multipart/form-data" autocomplete="off">
+      <form  class="edit-coffee-form" action="/coffee/<%=coffee._id%>?_method=PUT" method="post" autocomplete="off">
         <h4 class="edit-coffee-heading">Edit your post:</h4>
 
         <div class="edit-coffee-inputs-wrapper">
@@ -129,7 +129,8 @@
           </div>
 
           <div class="new-coffee-file-input-wrapper">
-             <input class="new-coffee-file-input" type="file" name="image" id="imageUpload" accept="image/*">
+            <label class="new-coffee-label" for="imageUrl">Image Url: </label>
+             <input class="new-coffee-file-input" value="<%=coffee.imageUrl%>" type="text" name="imageUrl" id="imageUpload">
           </div>
 
           <br>
@@ -219,10 +220,7 @@
                </select>
              </div>
 
-             
                 <textarea class="new-review-text-area" name="content" cols="80" rows="10"></textarea>
-             
-          
             <br><br>
              <button class="landing-btns" type="submit" value="Add Review">Add Review</button> <br><br>
          </form>

@@ -1,9 +1,14 @@
 <%- include('../partials/header') %>
+
+
+
 <div class="index-wrapper">
 <hr class="coffee-card-hr">
   <% if (coffees.length) { %>
     <% coffees.forEach((coffee) => { %>
   
+      <% let displayDate = new Date(coffee.roastDate).toLocaleDateString().slice(0, 10); %>
+
       <div class="coffee-card">
   
         <img class="coffee-user-icon"src="<%= coffee.user ? coffee.userAvatar : '/images/profile-user-svgrepo-com.svg' %>" referrerpolicy="no-referrer" alt="avatar">
@@ -11,7 +16,7 @@
 
         <div class="coffee-card-heading-wrapper">
           <a class="coffee-link" href="/coffee/<%= coffee._id %>"><h1 class="coffee-card-name-heading"><%= coffee.name %></h1></a>
-          <h2 class="coffee-subheading"><%= coffee.roaster %>&nbsp;|&nbsp;Roast date: <%= coffee.roastDate.toISOString().slice(0, 10) %></h2>
+          <h2 class="coffee-subheading"><%= coffee.roaster %>&nbsp;|&nbsp;Roast date: <%= displayDate %></h2>
           <h4 class="coffee-card-user">Reviewed by: <%= coffee.user ? coffee.userName : 'anonymous' %></h4>
         </div>
 
@@ -28,7 +33,7 @@
            </div>
         </div>
   
-        <div class="coffee-card-image-wrapper"><img class="coffee-card-img" src="<%= coffee.imageUrl %>" alt="coffee image"></div>
+        <div class="coffee-card-image-wrapper"><img class="coffee-card-img" src="<%= coffee.imageUrl %>" onerror="this.onerror=null; this.src='/images/broken-link-svgrepo-com.svg'" alt="coffee image"></div>
        
       </div>
       <hr class="coffee-card-hr">

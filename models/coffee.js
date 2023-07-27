@@ -24,55 +24,61 @@ const reviewSchema = new Schema({
   });
 
 
-const coffeeSchema = new Schema({
+  const coffeeSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
-      },
-      userName: String,
-      userAvatar: String,
+    },
+    userName: String,
+    userAvatar: String,
 
-      name:{ type: String, required: true },
-      roaster: { type: String, required: true },
-      imageUrl: { type: String, required: false },
-      roastDate: { type: Date, required: true, default: function () {
-        return new Date();
-      }, timeZone: 'UTC' },
-      aroma: {
+    name: { type: String, required: true },
+    roaster: { type: String, required: true },
+    imageUrl: { type: String, required: true, match: /^http:\/\/.*/ },
+    roastDate: {
+        type: Date,
+        required: true,
+        default: function () {
+            return new Date();
+        }
+    },
+
+    aroma: {
         type: Number,
         min: 1,
         max: 5,
         default: 5
-      },
-      acidity: {
+    },
+    acidity: {
         type: Number,
         min: 1,
         max: 5,
         default: 5
-      },
-      bodyRating: {
+    },
+    bodyRating: {
         type: Number,
         min: 1,
         max: 5,
         default: 5
-      },
-      balance: {
+    },
+    balance: {
         type: Number,
         min: 1,
         max: 5,
         default: 5
-      },
-      sweetness: {
+    },
+    sweetness: {
         type: Number,
         min: 1,
         max: 5,
         default: 5
-      },
-      initReview: { type: String, required: true },
-      reviews: [reviewSchema],
+    },
+    initReview: { type: String, required: true },
+    reviews: [reviewSchema],
 }, {
     timestamps: true
-  });
+});
+
 
   module.exports = mongoose.model('Coffee', coffeeSchema);
