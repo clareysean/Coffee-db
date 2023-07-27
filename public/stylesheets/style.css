@@ -39,12 +39,12 @@ body {
 
 .nav-heading{
   font-size: 3rem;
-
+  font-family: 'Raleway', 'Lato', arial, sans-serif;
 }
+
 .nav-heading, .nav-brand{
   margin: 10px 0 5px 0;
 }
-
 
 .nav-brand{
   height: 80px;
@@ -112,7 +112,6 @@ input, .search-btn{
   align-items: center;
 }
 
-
 .nav-menu{
   display: flex;
   justify-content: space-evenly;
@@ -121,6 +120,8 @@ input, .search-btn{
   gap: 63px;
   padding: 30px 0 30px 0;
 }
+
+/* //burger */
 
 .burger{
   display: none;
@@ -149,16 +150,7 @@ input, .search-btn{
   opacity: 100%;
 }
 
-@media (max-width: 1300px){
-.nav-link{
-  font-size: 1rem;
-}
-}
-
-
-
 /* landing page */
-
 
 .main-heading{
   font-family: 'Raleway', arial, sans-serif;
@@ -198,6 +190,7 @@ margin: 13vh 2vw 0 2vw;
   margin: 0 auto;
   height: fit-content;
 }
+
 .landing-panel{
   text-align: center;
   display: flex;
@@ -268,78 +261,11 @@ margin: 13vh 2vw 0 2vw;
   align-self: center;
 }
 
-@media(max-height: 490px){
- 
-  .main-heading{
-    font-size: 3rem;
-    margin-top: 12%;
-  }
-  .logo-badge{
-    margin-bottom: 5vh;
-  }
-}
-
 ul{
   list-style: none;
 }
 
-
-@media (max-width: 1190px){
-   
-  .landing-links-container{
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 15px;
-  }
-
-  .landing-btns-l, .landing-btns-r{
-    justify-self: center;
-    height: 100%;
-  }
-
-   .burger{
-    display: block;
-    grid-column: 3;
-    justify-self: flex-end;
-    align-self: center;
-   }
-
-   .burger.active .bar:nth-child(2){
-    opacity: 0;
-   }
-   .burger.active .bar:nth-child(1){
-    transform: translateY(10px) rotate(45deg);
-   }
-   .burger.active .bar:nth-child(3){
-    transform: translateY(-10px) rotate(-45deg);
-   }
-   .nav-menu, .nav-menu-wrapper{
-    height: 170px;
-    position: fixed;
-    left: -100%;
-    top: -1%;
-    gap: 0;
-    flex-direction: column;
-    background-color: var(--main-black);
-    width: 100%;
-    text-align: center;
-    transition: 0.2s;
-   }
-   .nav-item{
-      margin: 10px 0;
-   }
-
-   .nav-menu.active{
-    left: 0;
-    top: 0;
-    margin-top:0;
-   }
-
-
-}
-
-
-/* index */
+/* coffee display  */
 
 .index-wrapper, .favourites-page-wrapper, .show-coffee-wrapper, .results-wrapper{
   padding: 50px 100px 50px 100px;
@@ -350,18 +276,15 @@ ul{
   gap: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
-  /* grid-template-columns: repeat(6, 1fr) 2fr;
-  grid-template-rows: repeat(7, 50px); */
   margin: 30px 0 30px 0;
   padding: 0 100px 0 100px;
 }
 
 .coffee-user-icon{
   align-self: flex-start;
-  /* grid-column: 1;
-  grid-row: 1; */
   justify-self: center;
   margin: 0px 50px auto 0;
+  border-radius: 50%;
 }
 
 .coffee-link{
@@ -377,20 +300,18 @@ ul{
 }
 
 .coffee-card-name-heading{
-  margin: -10px 0 0 0;
- 
+  margin: -7px 0 0 0;
 }
 
 .coffee-card-heading-wrapper{
-  /* grid-row: 1; */
- align-self: flex-start;
+  align-self: flex-start;
   min-width: 20%;
-  /* grid-column: 2; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 }
+
 .coffee-link, .coffee-subheading{
 margin-top: 0;
 }
@@ -401,7 +322,6 @@ margin-top: 0;
   margin: 0 5px 5px -5px;
 }
 
-
 .coffee-card-review{
  font-size: 1rem;
  margin-top: 0;
@@ -409,14 +329,16 @@ margin-top: 0;
 }
 
 .coffee-card-img{
-  height: 190px;
+  height: 260px;
   margin: 0 0 0 50px;
+  border-radius: 5px;
 }
+
 .coffee-card-image-wrapper{
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  min-width: 27%;
+  min-width: 25%;
 }
 
 .coffee-card-middle-column{
@@ -430,8 +352,6 @@ margin-top: 0;
 }
 
 .scores-wrapper{
-  grid-column: 2 / span 5;
-  grid-row: 7;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -440,15 +360,6 @@ margin-top: 0;
 
 .scores-wrapper > h3{
   font-size: 1.3rem;
-}
-
-@media(max-width:1118px){
-  .coffee-card-middle-column{
-    margin: 0;
-  }
-  /* .coffee-card-image-wrapper{
-    margin-top: -187px;
-  } */
 }
 
 .new-coffee-text-area{
@@ -471,55 +382,10 @@ margin-top: 0;
   padding: 0 150px 0 150px;
 }
 
-@media(max-width:1719px){
-
-  .show-coffee-button-row{
-    align-self: flex-start;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-
-  .new-coffee-text-area{
-    width: 80%;
-  }
-  
-    .coffee-card{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      /* margin: 30px 0 30px 0; */
-      /* padding: 0; */
-    }
-  
-  .coffee-card-img{
-    margin: 0;
-    height: 175px;
-  }
-  .reviews-wrapper{
-    padding: 0 100px 0 100px;
-  }
-  .coffee-card{
-    flex-direction: column;
-    gap:20px;
-  }
-  .coffee-card-middle-column{
-    margin: 0;
-    align-self: flex-start;
-    justify-content: flex-start;
-    align-items: flex-start;
-    max-width:none;
-  }
-  .coffee-card-image-wrapper{
-    flex-grow: 2;
-    justify-content: flex-start;
-    align-items: center;
-  }
-}
-
 .delete-favourite-form-wrapper{
   margin: 0 auto 0 0;
   text-align: center;
+  min-width:30%;
 }
 
 .review-button-row{
@@ -540,7 +406,6 @@ margin-top: 0;
   padding: 0 50px 0 50px;
 }
 
-
 .edit-review-form-flex-container{
   display: flex;
   justify-content: flex-start;
@@ -554,7 +419,6 @@ margin-top: 0;
   align-items: flex-start;
   justify-content: flex-start;
   align-self: flex-start;
-  /* max-width: 10%; */
 }
 
 .review-card-middle-column{
@@ -588,137 +452,6 @@ margin-top: 0;
   flex-direction: column;
   height: 100%;
 }
-
-@media(max-width:501px){
-
-  .coffee-card-image-wrapper{
-    min-width: 80%;
-  }
-
-  .edit-review-txt-area{
-    width: 90%;
-  }
-
-  .review-content{
-    text-align: center;
-  }
-
-  .review-card-left-column{
-    display: flex;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .review-card-middle-column{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    flex-direction: column;
-  }
-
-  .edit-review-form-flex-container{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .edit-review-left-column, .edit-review-middle-column{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .review-card{
-    padding: 0;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-  .review-button-row{
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .review-btn{
-     align-self: center;
-  }
-
-  .delete-favourite-form-wrapper{
-    margin: 0 auto;
-  }
-
-  .delete-favourite-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .show-coffee-button-row{
-    align-self: flex-start;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .coffee-card{
-    padding: 0 20px 0 20px;
-  }
-
-  .show-coffee-wrapper{
-    padding: 50px 50px 50px 50px;
-  }
-
-  .reviews-wrapper{
-    padding: 0 20px 0 20px;
-  }
-
-  .coffee-card{
-    justify-content: center;
-    flex-direction: row;
-  }
-  .coffee-card-middle-column{
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    max-width:none;
-  }
-  .coffee-card-heading-wrapper{
-    margin: 10px 0 10px 0;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.6rem;
-    width: 100%;
-    text-align: center;
-  }
-  .coffee-user-icon{
-    margin: 0;
-  }
-  .coffee-card-review{
-    text-align: center;
-  }
-  .scores-wrapper{
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  .scores-wrapper > h3{
-    margin: 0;
-  }
-
-  .coffee-card-image-wrapper{
-    flex-grow: 2;
-    justify-content: center;
-    align-items: center;
-  }
-
-}
-
 
 .coffee-card-hr{
   height: 3px;
@@ -784,61 +517,9 @@ margin-top: 0;
   width: 500px;
 }
 
-
-@media (max-width:1800px){
-  .new-coffee-ratings-wrapper{
-    width:70%;
-  }
-}
-
-@media (max-width:1420px){
-
-  .new-coffee-ratings-wrapper{
-    align-items: flex-start;
-    width: 95%;
-}
-
-.new-review-text-area{
-  width: 50%;
-}
-
-.edit-review-txt-area{
-  opacity: 80%;
-  background-color: var(--main-white);
-  border-radius: 5px;
-  font: 1.2rem 'Lato', arial, sans-serif;
-  width: 50%;
-}
-}
-
 .review-card-user-img{
   height: 75px;
 }
-
-@media (max-width:1080px){
-
-  .review-card-user-img, .edit-review-user-img{
-    height: 50px;
-  }
-
-  .edit-review-txt-area{
-    width: 80%;
-  }
-
-  .new-coffee-ratings-wrapper{
-    flex-direction: column;
-    justify-content: space-between;
-    align-items:center;
-  }
-  .new-review-text-area{
-    width: 80%;
-  }
-
-  .reviews-wrapper{
-    padding: 0 20px 0 20px;
-  }
-}
-
 
 .new-coffee-label{
   font-size: 1.5rem;
@@ -910,8 +591,6 @@ margin-top: 0;
 
 /* favourites page */
 
-
-
 .favourites-heading{
   text-align: center;
   opacity: 80%;
@@ -923,6 +602,7 @@ margin-top: 0;
   font-size: 0.8rem;
   height: 30px;
   width: 160px;
+  margin-left: 0;
 }
 /* show page */
 
@@ -962,7 +642,6 @@ margin-top: 0;
   margin-top: 10px;
 }
 
-
 /* review section */
 
 .review-hr{
@@ -985,7 +664,6 @@ margin-top: 0;
 .review-content > .comma-icon{
   margin-left: 0;
 }
-
 
 .edit-form-container{
   margin: 30px 0 30px 0;
@@ -1011,7 +689,11 @@ margin-top: 0;
   border-radius: 2px;
   opacity: 80%;
   font-family: 'Lato', arial, sans-serif;
-  margin: 10px 0 10px 0;
+  margin: 10px 0;
+}
+
+.new-review-ratings-wrapper{
+  margin: 10px 0;
 }
 
 .new-review-text-area{
@@ -1020,41 +702,327 @@ margin-top: 0;
   font-family:'Lato', arial, sans-serif;
 }
 
+@media (max-width:1800px){
+  .new-coffee-ratings-wrapper{
+    width:70%;
+  }
+}
 
-@media (max-width: 770px){
-  .nav-search-wrapper{
+@media(max-width:1719px){
+
+  .show-coffee-button-row{
+    align-self: flex-start;
     flex-wrap: wrap;
-    grid-column: 1 / span 2;
-    margin: 5px;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
-  .search-bar-nav, .search-btn{
-    margin-bottom: 20px;
+
+  .new-coffee-text-area{
+    width: 80%;
   }
-  .burger{
-    margin:0;
+  
+    .coffee-card{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  
+  .coffee-card-img{
+    margin: 0;
+    height: 175px;
   }
-  .nav-heading, .nav-brand{
-    font-size: 2rem;
-    margin: 20px 0 0 0;
+
+  .coffee-card{
+    flex-direction: column;
+    gap:20px;
   }
-  .nav-brand{
-    height: 45px;
+  .coffee-card-middle-column{
+    margin: 0;
+    align-self: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width:none;
+  }
+  .coffee-card-image-wrapper{
+    flex-grow: 2;
+    justify-content: flex-start;
+    align-items: center;
   }
 }
 
+@media (max-width:1420px){
 
-@media (max-width: 770px) and (max-height: 490px){
-
-  .landing-btns-l, .landing-btns-r{
-    justify-self: center;
-    height: 30px;
-    font-size: 0.9rem;
-  }
-
-  .main-heading{
-    margin-top: 20%;
-  }
+  .new-coffee-ratings-wrapper{
+    align-items: flex-start;
+    width: 95%;
 }
+
+.new-review-text-area{
+  width: 50%;
+}
+
+.edit-review-txt-area{
+  opacity: 80%;
+  background-color: var(--main-white);
+  border-radius: 5px;
+  font: 1.2rem 'Lato', arial, sans-serif;
+  width: 50%;
+}
+}
+
+
+@media (max-width: 1300px){
+  .nav-link{
+    font-size: 1rem;
+  }
+  }
+
+@media (max-width: 1190px){
+   
+    .landing-links-container{
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 15px;
+    }
+  
+    .landing-btns-l, .landing-btns-r{
+      justify-self: center;
+      height: 100%;
+    }
+  
+     .burger{
+      display: block;
+      grid-column: 3;
+      justify-self: flex-end;
+      align-self: center;
+     }
+  
+     .burger.active .bar:nth-child(2){
+      opacity: 0;
+     }
+     .burger.active .bar:nth-child(1){
+      transform: translateY(10px) rotate(45deg);
+     }
+     .burger.active .bar:nth-child(3){
+      transform: translateY(-10px) rotate(-45deg);
+     }
+     .nav-menu, .nav-menu-wrapper{
+      height: 170px;
+      position: fixed;
+      left: -100%;
+      top: -1%;
+      gap: 0;
+      flex-direction: column;
+      background-color: var(--main-black);
+      width: 100%;
+      text-align: center;
+      transition: 0.2s;
+     }
+     .nav-item{
+        margin: 10px 0;
+     }
+  
+     .nav-menu.active{
+      left: 0;
+      top: 0;
+      margin-top:0;
+     }
+  }
+
+  @media (max-width:1080px){
+
+    .review-card-user-img, .edit-review-user-img{
+      height: 50px;
+    }
+  
+    .edit-review-txt-area{
+      width: 80%;
+    }
+  
+    .new-coffee-ratings-wrapper{
+      flex-direction: column;
+      justify-content: space-between;
+      align-items:center;
+    }
+    .new-review-text-area{
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 770px){
+    .nav-search-wrapper{
+      flex-wrap: wrap;
+      grid-column: 1 / span 2;
+      margin: 5px;
+    }
+    .search-bar-nav, .search-btn{
+      margin-bottom: 20px;
+    }
+    .burger{
+      margin:0;
+    }
+    .nav-heading, .nav-brand{
+      font-size: 2rem;
+      margin: 20px 0 0 0;
+    }
+    .nav-brand{
+      height: 45px;
+    }
+  }
+  
+
+  @media (max-width: 770px) and (max-height: 490px){
+
+    .landing-btns-l, .landing-btns-r{
+      justify-self: center;
+      height: 30px;
+      font-size: 0.9rem;
+    }
+  
+    .main-heading{
+      margin-top: 20%;
+    }
+  }
+
+  @media(max-width:501px){
+
+    .coffee-card-image-wrapper{
+      min-width: 80%;
+    }
+  
+    .edit-review-txt-area{
+      width: 90%;
+    }
+  
+    .review-content{
+      text-align: center;
+    }
+  
+    .review-card-left-column{
+      display: flex;
+      align-self: center;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .review-card-middle-column{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+      flex-direction: column;
+    }
+  
+    .edit-review-form-flex-container{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .edit-review-left-column, .edit-review-middle-column{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .review-card{
+      padding: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+  
+    .review-button-row{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .review-btn{
+       align-self: center;
+    }
+  
+    .delete-favourite-form-wrapper{
+      margin: 0 auto;
+    }
+  
+    .delete-favourite-form{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .show-coffee-button-row{
+      align-self: flex-start;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .coffee-card{
+      padding: 0 20px 0 20px;
+    }
+  
+    .show-coffee-wrapper{
+      padding: 50px 50px 50px 50px;
+    }
+  
+    .reviews-wrapper{
+      padding: 0 20px 0 20px;
+    }
+  
+    .coffee-card{
+      justify-content: center;
+      flex-direction: row;
+    }
+    .coffee-card-middle-column{
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+      max-width:none;
+    }
+    .coffee-card-heading-wrapper{
+      margin: 10px 0 10px 0;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.6rem;
+      width: 100%;
+      text-align: center;
+    }
+    .coffee-user-icon{
+      margin: 0;
+    }
+    .coffee-card-review{
+      text-align: center;
+    }
+    .scores-wrapper{
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .scores-wrapper > h3{
+      margin: 0;
+    }
+  
+    .coffee-card-image-wrapper{
+      flex-grow: 2;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media(max-height: 490px){
+ 
+    .main-heading{
+      font-size: 3rem;
+      margin-top: 12%;
+    }
+    .logo-badge{
+      margin-bottom: 5vh;
+    }
+  }
 
 .error-txt{
   font-size: 1rem;
@@ -1062,7 +1030,6 @@ margin-top: 0;
   margin: 20px auto;
   text-align: center;
 }
-
 
 .hidden{
   display: none;
