@@ -21,7 +21,7 @@ CoffeeDB is a web app built using Express, Node.js, EJS, Mongoose, and MongoDB w
 
 2. **Review Roasts**: Users can browse roasts and leave reviews, including a rating and comments.
 
-3. **Edit Posts and Reviews**: Users can edit their own posts and reviews to update information or correct mistakes.
+3. **Edit Posts and Reviews**: Users can edit their own posts and reviews.
 
 4. **Favorites List**: Users can create a personalized favorites list.
 

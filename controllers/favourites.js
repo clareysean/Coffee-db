@@ -45,12 +45,13 @@ async function create(req, res) {
       try{        
         const userFavouriteDoc = await UserFavourite.findOne({ user: req.user._id });
         res.render('coffee/favourites', { coffees: userFavouriteDoc.favourites });
-      return;}
-        catch(err){
-          console.log(err);
-          res.render('coffee/favourites', { errorMsg: `You don't have any favourites yet.` })
-          return;
-        }
+      return;
+      }
+      catch(err){
+        console.log(err);
+        res.render('coffee/favourites', { errorMsg: `You don't have any favourites yet.` })
+      return;
+      }
 
     }    
   }
