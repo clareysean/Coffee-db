@@ -101,8 +101,11 @@ async function create(req, res) {
       const updatedDate = new Date(req.body.roastDate);
       const todaysDate = new Date();
 
+      console.log(updatedDate)
+      console.log(todaysDate)
+
       if(updatedDate>todaysDate){
-        console.error('Error updating coffee:', err);
+        console.error('Error updating coffee:');
         res.render('coffee/show', { coffee: coffee, defaultRoastDate: roastDate, errorMsg: '*Update failed: The roast date cannot be in the future!'});
         return;
       }
