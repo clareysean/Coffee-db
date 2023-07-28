@@ -509,7 +509,8 @@ margin-top: 0;
 .new-coffee-select:focus,
 .new-coffee-text-area:focus,
 .edit-review-txt-area:focus,
-.new-review-text-area:focus
+.new-review-text-area:focus,
+.new-coffee-file-input:focus
 {
   outline: 2px solid #FF9505;
 }
