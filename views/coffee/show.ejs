@@ -2,7 +2,7 @@
 
 <% let displayDate = new Date(coffee.roastDate).toLocaleDateString().slice(0, 10); %>
 
-<%   const utcDateString = coffee.roastDate.toISOString(); %>
+<% const utcDateString = coffee.roastDate.toISOString(); %>
 <% let rD = new Date(utcDateString); %>
 <% let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`; %>
 <% roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;%>
