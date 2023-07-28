@@ -70,7 +70,7 @@
                  <label class="new-coffee-label" for="roaster">Roaster: </label>
                  <input class="new-coffee-input" type="text" value="<%=coffee.roaster%>" name="roaster">
                  <label class="new-coffee-label" for="roastDate">Roast Date: </label>
-                 <input class="date-picker" type="datetime-local" value="<%= defaultRoastDate %>" name="roastDate" />
+                 <input class="date-picker" type="datetime-local" value="<%= defaultRoastDate.toLocaleString() %>" name="roastDate" />
               </div>
 
               <div class="edit-coffee-ratings-wrapper">

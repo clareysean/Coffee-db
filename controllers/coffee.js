@@ -23,7 +23,7 @@ function newCoffee (req,res){
     const rD = coffeeForDefaultDate.roastDate;
 
     let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-    roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5).toLocaleString()}`;
+    roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
 
     if(!req.user){
       res.redirect(`/auth/google`)
@@ -33,14 +33,17 @@ function newCoffee (req,res){
 }
 
 async function show(req, res) {
-  try {
-      const coffee = await Coffee.findById(req.params.id);
-      console.log(req.params.id);
-      console.log(coffee);
+  
+   try {
+    const coffee = await Coffee.findById(req.params.id);
+    console.log(req.params.id);
+    console.log(coffee);
 
-      const rD = coffee.roastDate;
-      let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-      roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
+    const rD = coffee.roastDate;
+    let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
+    roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
+
+    console.log(roastDate)
 
       return res.render('coffee/show', { coffee, defaultRoastDate: roastDate });
   } catch (err) {
