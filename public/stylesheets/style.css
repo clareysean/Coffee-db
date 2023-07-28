@@ -713,7 +713,7 @@ margin-top: 0;
   border-radius: 5px;
   font-size: 1.5rem;
   font-family:'Lato', arial, sans-serif;
-  width: 80%;
+  width: 45%;
 }
 
 @media (max-width:1800px){
@@ -739,11 +739,12 @@ margin-top: 0;
     width: 80%;
   }
   
-    .coffee-card{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
+  .coffee-card{
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
   
   .coffee-card-img{
     margin: 0;
@@ -759,7 +760,7 @@ margin-top: 0;
     align-self: flex-start;
     justify-content: flex-start;
     align-items: flex-start;
-    max-width:none;
+    max-width:80%;
   }
   .coffee-card-image-wrapper{
     flex-grow: 2;
@@ -861,6 +862,11 @@ margin-top: 0;
   }
 
   @media (max-width: 770px){
+
+    .coffee-card-middle-column{
+      width: 100%;
+    }
+
     .nav-search-wrapper{
       flex-wrap: wrap;
       grid-column: 1 / span 2;
@@ -994,7 +1000,7 @@ margin-top: 0;
       margin: 0 auto;
       justify-content: center;
       align-items: center;
-      max-width:80%;
+      max-width:100%;
     }
     .coffee-card-heading-wrapper{
       margin: 10px 0 10px 0;
