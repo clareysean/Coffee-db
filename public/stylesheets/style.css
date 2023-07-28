@@ -30,8 +30,8 @@ body {
 }
 
 .nav-bar{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
   background-color: var(--main-brown);
   padding: 0 30px 0 30px;
   border-radius: 0 0 2rem 2rem;
@@ -825,7 +825,7 @@ margin-top: 0;
       height: 170px;
       position: fixed;
       left: -100%;
-      top: -1%;
+      top: -1.4%;
       gap: 0;
       flex-direction: column;
       background-color: var(--main-black);
@@ -839,7 +839,6 @@ margin-top: 0;
   
      .nav-menu.active{
       left: 0;
-      top: 0;
       margin-top:0;
      }
   }
@@ -909,6 +908,39 @@ margin-top: 0;
   }
 
   @media(max-width:501px){
+    .nav-menu, .nav-menu-wrapper{
+      height: 210px;
+    }
+
+    .burger{
+      margin-bottom: 10px;
+    }
+    .nav-wrapper{
+      padding: 0;
+    }
+
+    .nav-bar{
+      flex-wrap: wrap;
+      padding: 0 5px 0 5px;
+      justify-content: center;
+      width: 100%;
+    }
+    .search-bar-nav{
+      width: 80%
+    }
+    .search{
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+    }
+    .nav-search-wrapper{
+      justify-content: center;
+      align-items: center;
+    }
+
+    .index-wrapper{
+      padding: 50px 50px 50px 50px;
+    }
 
     .coffee-card-image-wrapper{
       min-width: 80%;
