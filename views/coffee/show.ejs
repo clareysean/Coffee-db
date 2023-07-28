@@ -2,6 +2,10 @@
 
 <% let displayDate = new Date(coffee.roastDate).toLocaleDateString().slice(0, 10); %>
 
+<%   const rD = coffee.roastDate; %>
+<% let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`; %>
+<% roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;%>
+
 <div class="show-coffee-wrapper">
       <h1 class="show-heading">Details:</h1>
       <%if(locals.errorMsg){%>
@@ -70,7 +74,7 @@
                  <label class="new-coffee-label" for="roaster">Roaster: </label>
                  <input class="new-coffee-input" type="text" value="<%=coffee.roaster%>" name="roaster">
                  <label class="new-coffee-label" for="roastDate">Roast Date: </label>
-                 <input class="date-picker" type="datetime-local" value="<%= defaultRoastDate.toLocaleString() %>" name="roastDate" />
+                 <input class="date-picker" type="datetime-local" value="<%= roastDate.toLocaleString() %>" name="roastDate" />
               </div>
 
               <div class="edit-coffee-ratings-wrapper">

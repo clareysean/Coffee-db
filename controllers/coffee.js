@@ -39,13 +39,7 @@ async function show(req, res) {
     console.log(req.params.id);
     console.log(coffee);
 
-    const rD = coffee.roastDate;
-    let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-    roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
-
-    console.log(roastDate)
-
-      return res.render('coffee/show', { coffee, defaultRoastDate: roastDate });
+      return res.render('coffee/show', { coffee });
   } catch (err) {
       console.error('Error rendering show page:', err);
   }
@@ -61,11 +55,8 @@ async function create(req, res) {
     console.log(req.body);
 
 
-    const coffeeForDefaultDate = new Coffee;
-    const rD = coffeeForDefaultDate.roastDate;
-
-    let defaultRoastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`;
-    defaultRoastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;
+    // const coffeeForDefaultDate = new Coffee;
+ 
 
     req.body.user = req.user._id;
     req.body.userName = req.user.name;
@@ -78,7 +69,7 @@ async function create(req, res) {
 
     if(submittedDate>todaysDate){
           console.error('Error creating coffee');
-          res.render('coffee/new', { errorMsg: 'Please pick a valid roast date.', roastDate: defaultRoastDate.toString});
+          res.render('coffee/new', { errorMsg: 'Please pick a valid roast date.'});
           return;
         }
         try{
@@ -87,7 +78,7 @@ async function create(req, res) {
         }
           catch(err){
             console.error('Error creating coffee:', err);
-            res.render('coffee/new', { errorMsg: 'Error creating coffee: Please fill out all required fields.', roastDate: defaultRoastDate});
+            res.render('coffee/new', { errorMsg: 'Error creating coffee: Please fill out all required fields.'});
           }
 }
 

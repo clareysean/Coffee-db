@@ -1,5 +1,11 @@
 <%- include('../partials/header') %>
 <div class="new-coffee-page-wrapper">
+
+<%    const rD = new Date(); %>
+
+<% let roastDate = `${rD.getFullYear()}-${(rD.getMonth() + 1).toString().padStart(2, '0')}`; %>
+<% roastDate += `-${rD.getDate().toString().padStart(2, '0')}T${rD.toTimeString().slice(0, 5)}`;%>
+
   <% if (locals.errorMsg) { %>
     <p class="error-txt"><%= errorMsg %></p>
   <% } %>
