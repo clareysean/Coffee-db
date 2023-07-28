@@ -912,12 +912,18 @@ margin-top: 0;
       height: 210px;
     }
 
+    .nav-menu{
+      justify-content: flex-start;
+    }
+    
+    .nav-item{
+      margin: 5px 0;
+    }
+
     .burger{
       margin-bottom: 10px;
     }
-    .nav-wrapper{
-      padding: 0;
-    }
+   
 
     .nav-bar{
       flex-wrap: wrap;
