@@ -271,12 +271,18 @@ ul{
   padding: 50px 100px 20px 100px;
 }
 
+.index-wrapper, .favourites-page-wrapper, .show-coffee-wrapper, .results-wrapper, .nav-wrapper{
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+
 .coffee-card{
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 30px 0 30px 0;
+  margin: 30px auto 30px auto;
   padding: 0 100px 0 100px;
 }
 
@@ -793,6 +799,10 @@ margin-top: 0;
   }
 
 @media (max-width: 1190px){
+
+    .nav-wrapper{
+      padding: 0;
+    }
    
     .landing-links-container{
       grid-template-columns: 1fr;
@@ -811,6 +821,11 @@ margin-top: 0;
       justify-self: flex-end;
       align-self: center;
      }
+
+    .burger.active{
+      position: fixed;
+      right: 30px;
+    }
   
      .burger.active .bar:nth-child(2){
       opacity: 0;
@@ -824,8 +839,7 @@ margin-top: 0;
      .nav-menu, .nav-menu-wrapper{
       height: 170px;
       position: fixed;
-      left: -100%;
-      top: -1.4%;
+      top: -100%;
       gap: 0;
       flex-direction: column;
       background-color: var(--main-black);
@@ -838,7 +852,8 @@ margin-top: 0;
      }
   
      .nav-menu.active{
-      left: 0;
+      top: 0;
+      right: 0;
       margin-top:0;
      }
   }
@@ -908,12 +923,22 @@ margin-top: 0;
   }
 
   @media(max-width:501px){
+
+  
+
+    .burger.active{
+      position: fixed;
+      top: 138px;
+      left: 30px;
+    }
+
     .nav-menu, .nav-menu-wrapper{
       height: 210px;
     }
 
     .nav-menu{
       justify-content: flex-start;
+      padding: 10px 0 0 0;
     }
     
     .nav-item{
@@ -942,10 +967,7 @@ margin-top: 0;
     .nav-search-wrapper{
       justify-content: center;
       align-items: center;
-    }
-
-    .index-wrapper{
-      padding: 50px 50px 50px 50px;
+      margin: 0 50px 0 50px;
     }
 
     .coffee-card-image-wrapper{
@@ -1022,8 +1044,8 @@ margin-top: 0;
       padding: 0 20px 0 20px;
     }
   
-    .show-coffee-wrapper{
-      padding: 50px 50px 50px 50px;
+    .show-coffee-wrapper, .results-wrapper, .index-wrapper, .favourites-page-wrapper{
+      padding: 50px 20px 50px 20px;
     }
   
     .reviews-wrapper{
@@ -1082,6 +1104,11 @@ margin-top: 0;
     }
   }
 
+  @media(max-width: 300px){
+    .nav-search-wrapper{
+      margin: 0 10px 0 10px;
+    }
+  }
 .error-txt{
   font-size: 1rem;
   color: var(--secondary-orange);
