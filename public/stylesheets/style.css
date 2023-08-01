@@ -82,6 +82,7 @@ input, .search-btn{
 
 .search-btn{
   height: 30px;
+  margin-top: 15px;
 }
 
 .search-btn:hover{
@@ -93,6 +94,7 @@ input, .search-btn{
   opacity: 50%;
   font-size: 0.9rem;
   color: var(--main-black);
+  margin-top: 15px;
 }
 
 
@@ -295,7 +297,6 @@ ul{
 
 .coffee-link{
   color: var(--main-white);
-  font-size: 1.2rem;
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
   opacity: 85%;
@@ -307,6 +308,7 @@ ul{
 
 .coffee-card-name-heading{
   margin: -7px 0 0 0;
+  font-size: 2.3rem;
 }
 
 .coffee-card-heading-wrapper{
@@ -494,6 +496,7 @@ margin-top: 0;
 .review-card-user-img{
   height: 80px;
   border-radius: 50%;
+  margin-top: 10px;
 }
 
 .new-coffee-label{
@@ -928,7 +931,7 @@ margin-top: 0;
 
     .burger.active{
       position: fixed;
-      top: 138px;
+      top: 132px;
       left: 30px;
     }
 
