@@ -205,6 +205,9 @@ const userFavouriteSchema = new Schema({
 module.exports = mongoose.model('UserFavourite', userFavouriteSchema);
 ```
 
+## Future improvements
+- Setup and configure S3 to handle image uploads for CoffeeDB entries
+
 ## Contributing
 
 Contributions are welcome. If you spot issues or have suggestions feel free to open an issue or create a pull request.
