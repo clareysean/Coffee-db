@@ -40,7 +40,6 @@ async function create(req, res) {
   
 
   async function index (req,res){
-    console.log(`in index favs`)
     if(req.user){
       try{        
         const userFavouriteDoc = await UserFavourite.findOne({ user: req.user._id });
