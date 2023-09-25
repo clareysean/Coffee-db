@@ -3,49 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Raleway:wght@300&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Raleway:wght@300&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>CoffeeDB</title>
   </head>
   <div class="nav-wrapper">
     <nav class="nav-bar">
-        
-          <div class="nav-search-wrapper">
-            <a href="/coffee" class="brand-link">
-              <h1 class="nav-heading">CoffeeDB</h1>
-            </a>
-            <a href="/coffee" class="brand-link">
-              <img class="nav-brand" src="/images/coffee-svgrepo-com.svg" alt="coffee logo">
-            </a>
-              <form class="search" action="/search" method="get">
-                  <input class="search-bar-nav" type="text" name="searchQuery">
-                  <button class="search-btn" type="submit"><img class="google-icon" src="/images/search-button-svgrepo-com.svg" alt=""></button>
-              </form>
-          </div>
-          <div class="nav-menu-wrapper">
-            <ul class="nav-menu">
-              <li class="nav-item"><a href="/coffee" class="nav-link">Browse</a></li>
-               <%if(user){%>
-                <li class="nav-item"><a href="/coffee/new" class="nav-link">Add a roast</a></li>
-                <li class="nav-item"><a href="/coffee/favourites" class="nav-link">Your favourites</a></li>
-                <li class="nav-item"><a href="/logout" class="nav-link">Log out</a></li>
-                
-               <% }  else { %>
-                <li class="nav-item"><a class="nav-link" href="/auth/google">Login<img class="google-icon" src='/images/icons8-google.svg'></a></li>
-                <%}%>
-            </ul>
-          </div>
-        
-        <div class="burger">
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-        </div>
+      <div class="nav-search-wrapper">
+        <a href="/coffee" class="brand-link">
+          <h1 class="nav-heading">CoffeeDB</h1>
+        </a>
+        <a href="/coffee" class="brand-link">
+          <img
+            class="nav-brand"
+            src="/images/coffee-svgrepo-com.svg"
+            alt="coffee logo" />
+        </a>
+        <form class="search" action="/search" method="get">
+          <input class="search-bar-nav" type="text" name="searchQuery" />
+          <button class="search-btn" type="submit">
+            <img
+              class="google-icon"
+              src="/images/search-button-svgrepo-com.svg"
+              alt="" />
+          </button>
+        </form>
+      </div>
+      <div class="nav-menu-wrapper">
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="/coffee" class="nav-link">Browse</a>
+          </li>
+          <%if(user){%>
+          <li class="nav-item">
+            <a href="/coffee/new" class="nav-link">Add a roast</a>
+          </li>
+          <li class="nav-item">
+            <a href="/coffee/favourites" class="nav-link">Your favourites</a>
+          </li>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">Log out</a>
+          </li>
+
+          <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/google"
+              >Login<img class="google-icon" src="/images/icons8-google.svg"
+            /></a>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+
+      <div class="burger">
+        <span class="bar"></span><span class="bar"></span
+        ><span class="bar"></span>
+      </div>
     </nav>
   </div>
   <script src="/scripts/headerHelper.js"></script>
-  <body>
+  <body></body>
+</html>

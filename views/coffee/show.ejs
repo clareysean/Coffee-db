@@ -162,7 +162,11 @@
 
                   <div class="review-card-middle-column">
                     <h2>Rating: <%= r.rating %> /5</h2>
-                    <p class="review-content"><img class="comma-icon" src="/images/comma-ish-glyph-svgrepo-com.svg" alt=""><br><%= r.content %></p>
+                    <p class="review-content"><img class="comma-icon" src="/images/comma-ish-glyph-svgrepo-com.svg" alt=""><br>
+                      <% if (r.content) { %>
+                        <p class="review-txt"><%= r.content %></p>
+                      <% } %>
+                      </p>
                   </div>
       
               <% if (user?._id.equals(r.user)) { %>

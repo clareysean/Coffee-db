@@ -104,11 +104,9 @@ input,
 .nav-menu-wrapper {
   display: flex;
   flex-wrap: nowrap;
-  grid-column: 2 / span 2;
   align-items: center;
   justify-content: flex-end;
   flex-grow: 1;
-  margin-top: 49px;
 }
 
 .navbar {
@@ -121,9 +119,8 @@ input,
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  justify-self: flex-end;
   gap: 63px;
-  padding: 30px 0 30px 0;
+  padding-top: 50px;
 }
 
 /* //burger */
@@ -531,6 +528,7 @@ ul {
 .review-content {
   font-size: 1.2rem;
   text-align: left;
+  margin-bottom: 0;
 }
 
 .review-card-user-img {
@@ -647,6 +645,13 @@ ul {
   width: 190px;
   border: none;
   border-radius: 4px;
+}
+
+.review-txt {
+  background-color: #232425;
+  padding: 3px 5px;
+  border-radius: 3px;
+  margin-top: 0;
 }
 
 /* edit coffee show */
@@ -889,6 +894,7 @@ ul {
     height: 170px;
     position: fixed;
     top: -100%;
+    right: 0;
     gap: 0;
     flex-direction: column;
     background-color: var(--main-black);
