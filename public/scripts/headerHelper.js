@@ -17,4 +17,3 @@ allNavLinks.forEach((link) =>
     navMenu.classList.remove("active");
   })
 );
-
