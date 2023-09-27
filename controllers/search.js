@@ -5,7 +5,6 @@ module.exports = {
 };
 
 async function search(req, res) {
-  console.log(req.query);
   const query = req.query.searchQuery;
   const sanitizedQuery = query.replace(/\s+/g, "").toLowerCase();
 
